@@ -38,16 +38,8 @@
         <div class="container-fluid" id="page"><?php echo $content; ?></div>
         <div id="footer-guard"><!-- --></div>
     </div>
-
     <footer>
-        Copyright &copy; 2009-<?php echo date('Y'); ?>
-        <?php echo $this->yupe->poweredBy();?>
-        <small class="label label-info"><?php echo $this->yupe->getVersion(); ?></small>
-        <br/>
-        <a href="http://amylabs.ru/?from=yupe-panel">
-            <?php echo Yii::t('YupeModule.yupe', 'Development and support'); ?></a> - <a href="http://amylabs.ru/?from=yupe-panel" target="_blank">amyLabs
-        </a>
-        <br/>
+        Copyright &copy; 2009-<?php echo date('Y'); ?>,
         <?php echo Yii::powered(); ?>
         <?php $this->widget('YPerformanceStatistic'); ?>
     </footer>
