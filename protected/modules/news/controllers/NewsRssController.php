@@ -2,9 +2,6 @@
 /**
  * NewsRssController контроллер для генерации rss-ленты новостей
  *
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
  * @package yupe.modules.news.controllers
  * @since 0.1
  *

@@ -2,10 +2,7 @@
 /**
  * Message translations.
  *
- * @author Anton Kucherov <idexter.ru@gmail.com>
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
+ *
  *
  * NOTE, this file must be saved in UTF-8 encoding.
  */

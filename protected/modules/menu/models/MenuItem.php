@@ -2,9 +2,6 @@
 /**
  * Menu основная модель для пунктов меню
  *
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
  * @package yupe.modules.menu.models
  * @since 0.1
  *

@@ -2,9 +2,6 @@
 /**
  * DictionaryData модель "данные справочника"
  *
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
  * @package yupe.modules.dictionary.models
  * @since 0.1
  *

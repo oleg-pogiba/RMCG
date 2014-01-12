@@ -3,9 +3,6 @@
 /**
  * MenuModule основной класс модуля menu
  *
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
  * @package yupe.modules.menu
  * @since 0.1
  *

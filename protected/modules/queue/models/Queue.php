@@ -3,9 +3,6 @@
 /**
  * Queue модель для работы с табличкой очереди
  *
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
  * @package yupe.modules.queue.models
  * @license  BSD https://raw.github.com/yupe/yupe/master/LICENSE
  * @since 0.1

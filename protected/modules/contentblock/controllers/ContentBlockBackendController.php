@@ -2,9 +2,6 @@
 /**
  * ContentBlockBackendController контроллер для управления блоками контента в панели управления
  *
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
  * @package yupe.modules.contentblock.controllers
  * @since 0.1
  *

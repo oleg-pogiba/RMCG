@@ -2,9 +2,6 @@
 /**
  * Обрамляет изображение в рамку, фиксируя его по центру.
  *
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
  * @package yupe.modules.image.widgets
  * @since 0.1
  *

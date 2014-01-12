@@ -2,9 +2,6 @@
 /**
  * PageModule основной класс модуля page
  *
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
  * @package yupe.modules.page
  * @since 0.1
  *

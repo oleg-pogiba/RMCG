@@ -2,9 +2,6 @@
 /**
  * DocsModule основной класс модуля docs
  *
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
  * @package yupe.modules.docs
  * @since 0.1
  *

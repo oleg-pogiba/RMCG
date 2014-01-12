@@ -2,9 +2,6 @@
 /**
  * News основная моделька для новостей
  *
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
  * @package yupe.modules.news.models
  * @since 0.1
  *

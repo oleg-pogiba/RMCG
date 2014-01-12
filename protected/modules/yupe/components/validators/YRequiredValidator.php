@@ -2,9 +2,6 @@
 /**
  * Валидатор заполненности поля
  *
- * @author yupe team <team@yupe.ru>
- * @link http://yupe.ru
- * @copyright 2009-2013 amyLabs && Yupe! team
  * @package yupe.modules.yupe.components.validators
  * @since 0.1
  *
