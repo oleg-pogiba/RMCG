@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-header" style="display:none">
     <h1><?php echo Yii::t('YupeModule.yupe', 'Control panel "{app}"', array('{app}' => CHtml::encode(Yii::t('YupeModule.yupe', Yii::app()->name)))); ?><br/></h1>
 </div>
 
@@ -12,7 +12,7 @@
         <?php if (is_array($messages)): ?>
             <?php foreach ($messages as $key => $value): ?>
                 <?php if (!is_array($value)) continue; ?>
-                <div class="accordion" id="accordion<?php echo $module->getId(); ?>">
+                <div class="accordion" id="accordion<?php echo $module->getId(); ?>" style="display:none" >
                     <div class="accordion-group">
                         <div class="accordion-heading">
                             <a  class="accordion-toggle"
@@ -50,7 +50,7 @@
 <?php endforeach; ?>
 
 
-<div class="alert">
+<div class="alert" style="display:none">
     <p>
         <?php
         $yiiCount    = count($yiiModules);

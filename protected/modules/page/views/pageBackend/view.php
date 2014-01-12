@@ -41,5 +41,5 @@
 <p><?php echo $model->body; ?></p>
 <br/>
 
-<li class="icon-globe">&nbsp;</li> 
+<li class="icon-globe">&nbsp;</li>
 <?php echo CHtml::link(Yii::app()->createAbsoluteUrl("/page/page/show", array("slug" => $model->slug)), array('/page/page/show', 'slug' => $model->slug)); ?>
