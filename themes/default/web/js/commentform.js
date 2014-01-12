@@ -1,18 +1,18 @@
-$(document).ready(function() {
-    $(document).on("click", '#wcml', function(event){
+$(document).ready(function () {
+    $(document).on("click", '#wcml', function (event) {
         event.preventDefault();
         $("div.comment-form").remove();
         $("#comment-form-wrap").show();
         $(this).hide();
     });
 
-    $(document).on('keyup', '#comment-form textarea, #comment-form input[type=text]', function(event){
+    $(document).on('keyup', '#comment-form textarea, #comment-form input[type=text]', function (event) {
         if (event.ctrlKey && event.keyCode == 13) {
             $(this).parents('#comment-form').submit();
         }
     });
 
-    $(document).on('submit', '#comment-form', function(){
+    $(document).on('submit', '#comment-form', function () {
         var backdrop = '<div class="backdrop"></div>';
         var submit = $(this).find('input[type=submit]');
         var curForm = this;
@@ -26,7 +26,7 @@ $(document).ready(function() {
             type: 'post',
             url: $(curForm).attr('action'),
             data: $(curForm).serialize(),
-            success: function(data) {
+            success: function (data) {
                 $(curForm).removeClass('loading');
                 $(backdrop).remove();
                 submit.removeAttr('disabled');
@@ -53,11 +53,11 @@ $(document).ready(function() {
                     $('#wcml').click();
                 }
 
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#messageBox").fadeOut('slow').remove();
                 }, 3000);
             },
-            error: function(data) {
+            error: function (data) {
                 $(curForm).removeClass('loading');
                 $(backdrop).remove();
                 $(curForm).find('input[type=submit]').removeAttr('disabled');
@@ -67,7 +67,7 @@ $(document).ready(function() {
                     message = errorMessage;
                 messageBox = '<div id="messageBox" class="alert alert-error">' + message + '</div>';
                 $(curForm).before(messageBox);
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#messageBox").fadeOut('slow').remove();
                 }, 3000);
             },
