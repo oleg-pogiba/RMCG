@@ -5,15 +5,15 @@
         <td class="preview"><span class="fade"></span></td>
         <td class="name">
             <span>
-                <?php echo CHtml::hiddenField('ajax', 'ajax')?>
-                <?php echo CHtml::activeLabel($this->model, 'name'); ?>
-                <?php echo CHtml::activeTextField($this->model, 'name', array('value' => '{%=file.name%}', 'name' => 'Image[{%=file.name%}][name]')) . "\n"; ?>
+                <?php echo CHtml::hiddenField('ajax', 'ajax') ?>
+	<?php echo CHtml::activeLabel($this->model, 'name'); ?>
+	<?php echo CHtml::activeTextField($this->model, 'name', array('value' => '{%=file.name%}', 'name' => 'Image[{%=file.name%}][name]')) . "\n"; ?>
             </span>
         </td>
         <td class="name">
             <span>
                 <?php echo CHtml::activeLabel($this->model, 'alt'); ?>
-                <?php echo CHtml::activeTextField($this->model, 'alt', array('value' => '{%=file.name%}', 'name' => 'Image[{%=file.name%}][alt]')) . "\n"; ?>
+	<?php echo CHtml::activeTextField($this->model, 'alt', array('value' => '{%=file.name%}', 'name' => 'Image[{%=file.name%}][alt]')) . "\n"; ?>
             </span>
         </td>
         <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
@@ -40,4 +40,6 @@
         {% } %}</td>
     </tr>
 {% } %}
+
+
 </script>

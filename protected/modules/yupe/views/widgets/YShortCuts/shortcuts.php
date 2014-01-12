@@ -13,24 +13,24 @@
 $mainAssets = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.yupe.views.assets'));
 Yii::app()->clientScript->registerCssFile($mainAssets . '/css/shortcuts.css'); ?>
 <div class="shortcuts">
-<?php
-if (count($this->shortcuts) > 0) {
-    foreach ($this->shortcuts as $name => $shortcut) {
-        if (isset($shortcut['items'])) {
-            foreach ($shortcut['items'] as $module => $item) {
-                echo CHtml::link(
-                    '<div class="cn">' . $this->getLabel($item) . $this->getUpdates($item, $module) . "</div>",
-                    $item['url'],
-                    $this->getHtmlOptions($item)
-                );
-            }
-        } else {
-            echo CHtml::link(
-                '<div class="cn">' . $this->getLabel($item) . $this->getUpdates($item, $name) . "</div>",
-                $item['url'],
-                $this->getHtmlOptions($item)
-            );
-        }
-    }
-} ?>
+	<?php
+	if (count($this->shortcuts) > 0) {
+		foreach ($this->shortcuts as $name => $shortcut) {
+			if (isset($shortcut['items'])) {
+				foreach ($shortcut['items'] as $module => $item) {
+					echo CHtml::link(
+						'<div class="cn">' . $this->getLabel($item) . $this->getUpdates($item, $module) . "</div>",
+						$item['url'],
+						$this->getHtmlOptions($item)
+					);
+				}
+			} else {
+				echo CHtml::link(
+					'<div class="cn">' . $this->getLabel($item) . $this->getUpdates($item, $name) . "</div>",
+					$item['url'],
+					$this->getHtmlOptions($item)
+				);
+			}
+		}
+	} ?>
 </div>

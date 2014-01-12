@@ -10,12 +10,12 @@
  *
  **/
 return array(
-    'module'   => array(
-        'class' => 'application.modules.homepage.HomepageModule',
-    ),
-    'import'    => array(),
-    'component' => array(),
-    'rules'     => array(
-        '/home' => 'homepage/homepage/index',
-    ),
+	'module' => array(
+		'class' => 'application.modules.homepage.HomepageModule',
+	),
+	'import' => array(),
+	'component' => array(),
+	'rules' => array(
+		'/home' => 'homepage/homepage/index',
+	),
 );

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Queue fix index migration
  * Класс миграций для модуля Queue
@@ -12,18 +13,18 @@
 class m131007_031000_queue_fix_index extends yupe\components\DbMigration
 {
 
-    public function safeUp()
-    {
-        $this->dropIndex("ux_{{queue_queue}}_worker", '{{queue_queue}}');
-        $this->dropIndex("ux_{{queue_queue}}_priority", '{{queue_queue}}');
+	public function safeUp()
+	{
+		$this->dropIndex("ux_{{queue_queue}}_worker", '{{queue_queue}}');
+		$this->dropIndex("ux_{{queue_queue}}_priority", '{{queue_queue}}');
 
-        $this->createIndex("ux_{{queue_queue}}_worker", '{{queue_queue}}', "worker");
-        $this->createIndex("ux_{{queue_queue}}_priority", '{{queue_queue}}', "priority");
-    }
- 
+		$this->createIndex("ux_{{queue_queue}}_worker", '{{queue_queue}}', "worker");
+		$this->createIndex("ux_{{queue_queue}}_priority", '{{queue_queue}}', "priority");
+	}
 
-    public function safeDown()
-    {
-    	
-    }
+
+	public function safeDown()
+	{
+
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Дефолтный контроллер сайта:
  *
@@ -12,64 +13,64 @@
  **/
 class SiteController extends yupe\components\controllers\FrontController
 {
-    const POST_PER_PAGE = 5;
+	const POST_PER_PAGE = 5;
 
-    public function actionModern()
-    {
-        $this->render('modern');
-    }
-
-
-    /**
-     * Отображение главной страницы
-     * 
-     * @return void
-     */
-    public function actionIndex()
-    {
-        $this->render('welcome');
-    }
-
-    /**
-     * Отображение для ошибок:
-     *
-     * @return void
-     */
-    public function actionError()
-    {
-        $error = Yii::app()->errorHandler->error;
-
-        if (empty($error) || !isset($error['code']) || !(isset($error['message']) || isset($error['msg']))) {
-            $this->redirect(array('index'));
-        }
-
-        if (Yii::app()->getRequest()->getIsAjaxRequest()) {
-            echo json_encode(
-                $error
-            );
-        } else {            
-            $this->render(
-                'error',
-                array(
-                    'error' => $error
-                )
-            );
-        }
-    }
+	public function actionModern()
+	{
+		$this->render('modern');
+	}
 
 
-    public function actionMain()
-    {
-        $dataProvider = new CActiveDataProvider('Post', array(
-            'criteria' => new CDbCriteria(array(
-                'condition' => 't.status = :status',
-                'params'    => array(':status' => Post::STATUS_PUBLISHED),
-                'limit'     => self::POST_PER_PAGE,
-                'order'     => 't.id DESC',
-                'with'      => array('createUser', 'blog','commentsCount'),
-            )),
-        ));
+	/**
+	 * Отображение главной страницы
+	 *
+	 * @return void
+	 */
+	public function actionIndex()
+	{
+		$this->render('welcome');
+	}
 
-        $this->render('main', array('dataProvider' => $dataProvider));
-    }
+	/**
+	 * Отображение для ошибок:
+	 *
+	 * @return void
+	 */
+	public function actionError()
+	{
+		$error = Yii::app()->errorHandler->error;
+
+		if (empty($error) || !isset($error['code']) || !(isset($error['message']) || isset($error['msg']))) {
+			$this->redirect(array('index'));
+		}
+
+		if (Yii::app()->getRequest()->getIsAjaxRequest()) {
+			echo json_encode(
+				$error
+			);
+		} else {
+			$this->render(
+				'error',
+				array(
+					'error' => $error
+				)
+			);
+		}
+	}
+
+
+	public function actionMain()
+	{
+		$dataProvider = new CActiveDataProvider('Post', array(
+			'criteria' => new CDbCriteria(array(
+					'condition' => 't.status = :status',
+					'params' => array(':status' => Post::STATUS_PUBLISHED),
+					'limit' => self::POST_PER_PAGE,
+					'order' => 't.id DESC',
+					'with' => array('createUser', 'blog', 'commentsCount'),
+				)),
+		));
+
+		$this->render('main', array('dataProvider' => $dataProvider));
+	}
 }

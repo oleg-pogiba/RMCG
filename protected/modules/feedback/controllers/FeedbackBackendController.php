@@ -1,4 +1,5 @@
 <?php
+
 /**
  * FeedbackBackendController контроллер для работы с сообщениями обратной связи в панели управления
  *
@@ -9,316 +10,315 @@
  * @link     http://yupe.ru
  *
  **/
-
 class FeedbackBackendController extends yupe\components\controllers\BackController
 {
-    // FeedBack $model
-    private $_model;
+	// FeedBack $model
+	private $_model;
 
-    /**
-     * Displays a particular model.
-     *
-     * @param int $id - record id
-     *
-     * @return void
-     */
-    public function actionView($id = null)
-    {
-        // Обработка при Ajax-запросе:
-        if (Yii::app()->getRequest()->getIsAjaxRequest()) {
-            
-            return Yii::app()->ajax->success(
-                array(
-                    'html' => $this->renderPartial(
-                        'view', array(
-                            'model' => $this->loadModel($id)
-                        ), true, false
-                    )
-                )
-            );
-        }
+	/**
+	 * Displays a particular model.
+	 *
+	 * @param int $id - record id
+	 *
+	 * @return void
+	 */
+	public function actionView($id = null)
+	{
+		// Обработка при Ajax-запросе:
+		if (Yii::app()->getRequest()->getIsAjaxRequest()) {
 
-        $this->render('view', array('model' => $this->loadModel()));
-    }
+			return Yii::app()->ajax->success(
+				array(
+					'html' => $this->renderPartial(
+							'view', array(
+								'model' => $this->loadModel($id)
+							), true, false
+						)
+				)
+			);
+		}
 
-    /**
-     * Creates a new model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     *
-     * @return void
-     */
-    public function actionCreate()
-    {
-        $model = new FeedBack;
+		$this->render('view', array('model' => $this->loadModel()));
+	}
 
-        if (($data = Yii::app()->getRequest()->getPost('FeedBack')) !== null) {
-            
-            $model->setAttributes($data);
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 *
+	 * @return void
+	 */
+	public function actionCreate()
+	{
+		$model = new FeedBack;
 
-            if ($model->status == FeedBack::STATUS_ANSWER_SENDED) {
-                $model->answer_user = Yii::app()->user->getId();
-                $model->answer_date = new CDbExpression('NOW()');
-            }
+		if (($data = Yii::app()->getRequest()->getPost('FeedBack')) !== null) {
 
-            if ($model->save()) {
-                Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
-                    Yii::t('FeedbackModule.feedback', 'Message saved!')
-                );
+			$model->setAttributes($data);
 
-                $this->redirect(
-                    (array) Yii::app()->getRequest()->getPost(
-                        'submit-type', array('create')
-                    )
-                );
-            }
-        }
-        $this->render('create', array('model' => $model));
-    }
+			if ($model->status == FeedBack::STATUS_ANSWER_SENDED) {
+				$model->answer_user = Yii::app()->user->getId();
+				$model->answer_date = new CDbExpression('NOW()');
+			}
 
-    /**
-     * Updates a particular model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     *
-     * @param int $id - record $id
-     * 
-     * @return void
-     */
-    public function actionUpdate($id = null)
-    {
-        $model = $this->loadModel($id);
+			if ($model->save()) {
+				Yii::app()->user->setFlash(
+					YFlashMessages::SUCCESS_MESSAGE,
+					Yii::t('FeedbackModule.feedback', 'Message saved!')
+				);
 
-        $status = $model->status; 
+				$this->redirect(
+					(array)Yii::app()->getRequest()->getPost(
+						'submit-type', array('create')
+					)
+				);
+			}
+		}
+		$this->render('create', array('model' => $model));
+	}
 
-        if (($data = Yii::app()->getRequest()->getPost('FeedBack')) !== null) {
-            $model->setAttributes($data);
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 *
+	 * @param int $id - record $id
+	 *
+	 * @return void
+	 */
+	public function actionUpdate($id = null)
+	{
+		$model = $this->loadModel($id);
 
-            if ($status != FeedBack::STATUS_ANSWER_SENDED && $model->status == FeedBack::STATUS_ANSWER_SENDED) {
-                $model->answer_user = Yii::app()->user->getId();
-                $model->answer_date = new CDbExpression('NOW()');
-            }
+		$status = $model->status;
 
-            if ($model->save()) {
-                Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
-                    Yii::t('FeedbackModule.feedback', 'Message was updated')
-                );
+		if (($data = Yii::app()->getRequest()->getPost('FeedBack')) !== null) {
+			$model->setAttributes($data);
 
-                $this->redirect(
-                    (array) Yii::app()->getRequest()->getPost(
-                        'submit-type', array('update', 'id' => $model->id)
-                    )
-                );
-            }
-        }
+			if ($status != FeedBack::STATUS_ANSWER_SENDED && $model->status == FeedBack::STATUS_ANSWER_SENDED) {
+				$model->answer_user = Yii::app()->user->getId();
+				$model->answer_date = new CDbExpression('NOW()');
+			}
 
-        $this->render('update', array('model' => $model));
-    }
+			if ($model->save()) {
+				Yii::app()->user->setFlash(
+					YFlashMessages::SUCCESS_MESSAGE,
+					Yii::t('FeedbackModule.feedback', 'Message was updated')
+				);
 
-    /**
-     * Экшен создания ответа на сообщение:
-     * 
-     * @param int $id - ID сообщения
-     * 
-     * @return void
-     *
-     * @throws CHttpException
-     */
-    public function actionAnswer($id = null)
-    {
-        $model = $this->loadModel($id);
+				$this->redirect(
+					(array)Yii::app()->getRequest()->getPost(
+						'submit-type', array('update', 'id' => $model->id)
+					)
+				);
+			}
+		}
 
-        $form = new AnswerForm;
+		$this->render('update', array('model' => $model));
+	}
 
-        $form->setAttributes(
-            array(
-                'answer' => $model->answer,
-                'is_faq' => $model->is_faq,
-            )
-        );
+	/**
+	 * Экшен создания ответа на сообщение:
+	 *
+	 * @param int $id - ID сообщения
+	 *
+	 * @return void
+	 *
+	 * @throws CHttpException
+	 */
+	public function actionAnswer($id = null)
+	{
+		$model = $this->loadModel($id);
 
-        // Обработка при Ajax-запросе:
-        if (Yii::app()->getRequest()->getIsAjaxRequest()) {
-            
-            if ($this->saveAnswer($form, $model) === true) {
-                return true;
-            }
+		$form = new AnswerForm;
 
-            // Если уже отправили сообщение:
-            if ($model->status == FeedBack::STATUS_ANSWER_SENDED) {
-                return Yii::app()->ajax->failure(
-                    array(
-                        'message' => Yii::t('FeedbackModule.feedback', 'Attention! Reply for this message already sent!')
-                    )
-                );
-            }
+		$form->setAttributes(
+			array(
+				'answer' => $model->answer,
+				'is_faq' => $model->is_faq,
+			)
+		);
 
-            return Yii::app()->ajax->success(
-                array(
-                    'html' => $this->renderPartial(
-                        '_ajax_answer', array(
-                            'model'      => $model,
-                            'answerForm' => $form
-                        ), true, false
-                    )
-                )
-            );
-        }
+		// Обработка при Ajax-запросе:
+		if (Yii::app()->getRequest()->getIsAjaxRequest()) {
 
-        if ($model->status == FeedBack::STATUS_ANSWER_SENDED) {
-            Yii::app()->user->setFlash(
-                YFlashMessages::SUCCESS_MESSAGE,
-                Yii::t('FeedbackModule.feedback', 'Attention! Reply for this message already sent!')
-            );
-        }
+			if ($this->saveAnswer($form, $model) === true) {
+				return true;
+			}
 
-        list($form, $model) = $this->saveAnswer($form, $model);
+			// Если уже отправили сообщение:
+			if ($model->status == FeedBack::STATUS_ANSWER_SENDED) {
+				return Yii::app()->ajax->failure(
+					array(
+						'message' => Yii::t('FeedbackModule.feedback', 'Attention! Reply for this message already sent!')
+					)
+				);
+			}
 
-        $this->render('answer', array('model' => $model, 'answerForm' => $form));
-    }
+			return Yii::app()->ajax->success(
+				array(
+					'html' => $this->renderPartial(
+							'_ajax_answer', array(
+								'model' => $model,
+								'answerForm' => $form
+							), true, false
+						)
+				)
+			);
+		}
 
-    /**
-     * Сохраняем данные в СУБД, при наявности POST-запросаЖ
-     * 
-     * @param AnswerForm $form  - форма ответа
-     * @param FeedBack   $model - модель
-     * 
-     * @return mixed
-     */
-    public function saveAnswer(AnswerForm $form, FeedBack $model)
-    {
-        if (Yii::app()->getRequest()->getIsPostRequest() && ($data = Yii::app()->getRequest()->getPost('AnswerForm')) !== null) {
-            $form->setAttributes($data);
+		if ($model->status == FeedBack::STATUS_ANSWER_SENDED) {
+			Yii::app()->user->setFlash(
+				YFlashMessages::SUCCESS_MESSAGE,
+				Yii::t('FeedbackModule.feedback', 'Attention! Reply for this message already sent!')
+			);
+		}
 
-            if ($form->validate()) {
-                
-                $model->setAttributes(array(
-                    'answer'      => $form->answer,
-                    'is_faq'      => $form->is_faq,
-                    'answer_user' => Yii::app()->user->getId(),
-                    'answer_date' => new CDbExpression('NOW()'),
-                    'status'      => FeedBack::STATUS_ANSWER_SENDED,
-                 ));
+		list($form, $model) = $this->saveAnswer($form, $model);
 
-                if ($model->save()) {
-                    //отправка ответа
-                    $body = $this->renderPartial('answerEmail', array('model' => $model), true);
+		$this->render('answer', array('model' => $model, 'answerForm' => $form));
+	}
 
-                    Yii::app()->mail->send(
-                        Yii::app()->getModule('feedback')->notifyEmailFrom,
-                        $model->email,
-                        'RE: ' . $model->theme,
-                        $body
-                    );
+	/**
+	 * Сохраняем данные в СУБД, при наявности POST-запросаЖ
+	 *
+	 * @param AnswerForm $form - форма ответа
+	 * @param FeedBack $model - модель
+	 *
+	 * @return mixed
+	 */
+	public function saveAnswer(AnswerForm $form, FeedBack $model)
+	{
+		if (Yii::app()->getRequest()->getIsPostRequest() && ($data = Yii::app()->getRequest()->getPost('AnswerForm')) !== null) {
+			$form->setAttributes($data);
 
-                    if (Yii::app()->getRequest()->getIsAjaxRequest() == false) {
-                        Yii::app()->user->setFlash(
-                            YFlashMessages::SUCCESS_MESSAGE,
-                            Yii::t('FeedbackModule.feedback', 'Reply on message was sent!')
-                        );
+			if ($form->validate()) {
 
-                        $this->redirect(array('/feedback/default/view/', 'id' => $model->id));
-                    } else {
-                        Yii::app()->ajax->success(
-                            array(
-                                'message' => Yii::t('FeedbackModule.feedback', 'Reply on message was sent!'),
-                            )
-                        );
+				$model->setAttributes(array(
+					'answer' => $form->answer,
+					'is_faq' => $form->is_faq,
+					'answer_user' => Yii::app()->user->getId(),
+					'answer_date' => new CDbExpression('NOW()'),
+					'status' => FeedBack::STATUS_ANSWER_SENDED,
+				));
 
-                        return true;
-                    }
-                } else {
-                    return array($form, $model);
-                }
-            }
-        }
+				if ($model->save()) {
+					//отправка ответа
+					$body = $this->renderPartial('answerEmail', array('model' => $model), true);
 
-        return array($form, $model);
-    }
+					Yii::app()->mail->send(
+						Yii::app()->getModule('feedback')->notifyEmailFrom,
+						$model->email,
+						'RE: ' . $model->theme,
+						$body
+					);
 
-    /**
-     * Deletes a particular model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     *
-     * @return void
-     *
-     * @throws CHttpException
-     */
-    public function actionDelete()
-    {
-        if (Yii::app()->getRequest()->getIsPostRequest()) {
-            // we only allow deletion via POST request
-            $this->loadModel()->delete();
+					if (Yii::app()->getRequest()->getIsAjaxRequest() == false) {
+						Yii::app()->user->setFlash(
+							YFlashMessages::SUCCESS_MESSAGE,
+							Yii::t('FeedbackModule.feedback', 'Reply on message was sent!')
+						);
 
-            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-            Yii::app()->getRequest()->getIsAjaxRequest() || $this->redirect(
-                (array) Yii::app()->getRequest()->getPost('returnUrl', 'index')
-            );
-        } else {
-            throw new CHttpException(
-                400,
-                Yii::t('FeedbackModule.feedback', 'Bad request. Please don\'t repeate similar requests anymore')
-            );
-        }
-    }
-    
-    /**
-     * Manages all models.
-     *
-     * @return void
-     */
-    public function actionIndex()
-    {
-        $model = new FeedBack('search');
-        
-        $model->unsetAttributes(); // clear any default values
-        
-        $model->setAttributes(
-            Yii::app()->getRequest()->getParam('FeedBack', array())
-        );
+						$this->redirect(array('/feedback/default/view/', 'id' => $model->id));
+					} else {
+						Yii::app()->ajax->success(
+							array(
+								'message' => Yii::t('FeedbackModule.feedback', 'Reply on message was sent!'),
+							)
+						);
 
-        $this->render('index', array('model' => $model));
-    }
+						return true;
+					}
+				} else {
+					return array($form, $model);
+				}
+			}
+		}
 
-    /**
-     * Returns the data model based on the primary key given in the GET variable.
-     * If the data model is not found, an HTTP exception will be raised.
-     *
-     * @param int $id - record value
-     *
-     * @return FeedBack $model
-     *
-     * @throws CHttpException
-     */
-    public function loadModel($id = null)
-    {
-        if ($this->_model === null) {
+		return array($form, $model);
+	}
 
-            $id = $id ?: Yii::app()->getRequest()->getParam('id');
+	/**
+	 * Deletes a particular model.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @return void
+	 *
+	 * @throws CHttpException
+	 */
+	public function actionDelete()
+	{
+		if (Yii::app()->getRequest()->getIsPostRequest()) {
+			// we only allow deletion via POST request
+			$this->loadModel()->delete();
 
-            if (($this->_model = FeedBack::model()->findByPk($id)) === null) {
-                throw new CHttpException(
-                    404,
-                    Yii::t('FeedbackModule.feedback', 'Requested page was not found!')
-                );
-            }
-        }
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			Yii::app()->getRequest()->getIsAjaxRequest() || $this->redirect(
+				(array)Yii::app()->getRequest()->getPost('returnUrl', 'index')
+			);
+		} else {
+			throw new CHttpException(
+				400,
+				Yii::t('FeedbackModule.feedback', 'Bad request. Please don\'t repeate similar requests anymore')
+			);
+		}
+	}
 
-        return $this->_model;
-    }
+	/**
+	 * Manages all models.
+	 *
+	 * @return void
+	 */
+	public function actionIndex()
+	{
+		$model = new FeedBack('search');
 
-    /**
-     * Performs the AJAX validation.
-     * 
-     * @param FeedBack $model - the model to be validated
-     *
-     * @return void
-     */
-    protected function performAjaxValidation(FeedBack $model)
-    {
-        if (Yii::app()->getRequest()->getIsAjaxRequest() && Yii::app()->getRequest()->getPost('ajax') === 'feed-back-form') {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }
-    }
+		$model->unsetAttributes(); // clear any default values
+
+		$model->setAttributes(
+			Yii::app()->getRequest()->getParam('FeedBack', array())
+		);
+
+		$this->render('index', array('model' => $model));
+	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 *
+	 * @param int $id - record value
+	 *
+	 * @return FeedBack $model
+	 *
+	 * @throws CHttpException
+	 */
+	public function loadModel($id = null)
+	{
+		if ($this->_model === null) {
+
+			$id = $id ? : Yii::app()->getRequest()->getParam('id');
+
+			if (($this->_model = FeedBack::model()->findByPk($id)) === null) {
+				throw new CHttpException(
+					404,
+					Yii::t('FeedbackModule.feedback', 'Requested page was not found!')
+				);
+			}
+		}
+
+		return $this->_model;
+	}
+
+	/**
+	 * Performs the AJAX validation.
+	 *
+	 * @param FeedBack $model - the model to be validated
+	 *
+	 * @return void
+	 */
+	protected function performAjaxValidation(FeedBack $model)
+	{
+		if (Yii::app()->getRequest()->getIsAjaxRequest() && Yii::app()->getRequest()->getPost('ajax') === 'feed-back-form') {
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
 }

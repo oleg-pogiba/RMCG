@@ -30,51 +30,51 @@ use Yii;
 
 class AsyncResponse extends CApplicationComponent
 {
-    public $success         = true;
-    public $failure         = false;
-    public $resultParamName = 'result';
-    public $dataParamName   = 'data';
+	public $success = true;
+	public $failure = false;
+	public $resultParamName = 'result';
+	public $dataParamName = 'data';
 
-    public function init()
-    {
-        return true;
-    }
+	public function init()
+	{
+		return true;
+	}
 
-    public function success($data = null)
-    {
-        ContentType::setHeader(ContentType::TYPE_JSON);
+	public function success($data = null)
+	{
+		ContentType::setHeader(ContentType::TYPE_JSON);
 
-        echo json_encode(array(
-            $this->resultParamName => $this->success,
-            $this->dataParamName   => $data,
-        ));
+		echo json_encode(array(
+			$this->resultParamName => $this->success,
+			$this->dataParamName => $data,
+		));
 
-        Yii::app()->end();
-    }
+		Yii::app()->end();
+	}
 
-    public function failure($data = null)
-    {
-        ContentType::setHeader(ContentType::TYPE_JSON);
+	public function failure($data = null)
+	{
+		ContentType::setHeader(ContentType::TYPE_JSON);
 
-        echo json_encode(array(
-            $this->resultParamName => $this->failure,
-            $this->dataParamName   => $data,
-        ));
+		echo json_encode(array(
+			$this->resultParamName => $this->failure,
+			$this->dataParamName => $data,
+		));
 
-        Yii::app()->end();
-    }
+		Yii::app()->end();
+	}
 
-    public function raw($data)
-    {
-        ContentType::setHeader(ContentType::TYPE_JSON);
+	public function raw($data)
+	{
+		ContentType::setHeader(ContentType::TYPE_JSON);
 
-        echo json_encode($data);
-        Yii::app()->end();
-    }
+		echo json_encode($data);
+		Yii::app()->end();
+	}
 
-    public function rawText($data)
-    {
-        echo $data;
-        Yii::app()->end();
-    }
+	public function rawText($data)
+	{
+		echo $data;
+		Yii::app()->end();
+	}
 }

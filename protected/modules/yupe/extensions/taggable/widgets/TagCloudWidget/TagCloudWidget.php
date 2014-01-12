@@ -1,46 +1,47 @@
 <?php
+
 class TagCloudWidget extends YWidget
 {
-    public $count = 10;
-    public $model;
+	public $count = 10;
+	public $model;
 
-    public function run()
-    {
-        if (!@class_exists($this->model)) {
-            echo CHtml::tag(
-                'p', array(
-                    'class' => 'alert alert-error'
-                ), Yii::t(
-                    'YupeModule.yupe', 'Widget {widget}: Model "{model}" was not found!', array(
-                        '{model}'  => $this->model,
-                        '{widget}' => get_class($this),
-                    )
-                )
-            );
-            return false;
-        }
-        $model = $this->model;
-        $model::model()->resetAllTagsCache();
+	public function run()
+	{
+		if (!@class_exists($this->model)) {
+			echo CHtml::tag(
+				'p', array(
+					'class' => 'alert alert-error'
+				), Yii::t(
+					'YupeModule.yupe', 'Widget {widget}: Model "{model}" was not found!', array(
+						'{model}' => $this->model,
+						'{widget}' => get_class($this),
+					)
+				)
+			);
+			return false;
+		}
+		$model = $this->model;
+		$model::model()->resetAllTagsCache();
 
-        $criteria = new CDbCriteria;
-        $criteria->order = '"count" DESC';
-        $criteria->limit = $this->count;
+		$criteria = new CDbCriteria;
+		$criteria->order = '"count" DESC';
+		$criteria->limit = $this->count;
 
-        $tags = $model::model()->getAllTagsWithModelsCount($criteria);
+		$tags = $model::model()->getAllTagsWithModelsCount($criteria);
 
-        $total = 0;
+		$total = 0;
 
-        foreach ($tags as $tag)
-            $total += $tag['count'];
+		foreach ($tags as $tag)
+			$total += $tag['count'];
 
-        $outtags = array();
+		$outtags = array();
 
-        if ($total > 0) {
-            foreach ($tags as $tag)
-                $outtags[$tag['name']] = 8 + (int) (16 * $tag['count'] / ($total + 10));
-            ksort($outtags);
-        }
+		if ($total > 0) {
+			foreach ($tags as $tag)
+				$outtags[$tag['name']] = 8 + (int)(16 * $tag['count'] / ($total + 10));
+			ksort($outtags);
+		}
 
-        $this->render('tagcloud', array('tags' => $outtags));
-    }
+		$this->render('tagcloud', array('tags' => $outtags));
+	}
 }

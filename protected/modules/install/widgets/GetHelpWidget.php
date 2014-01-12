@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * Файл конфигурации модуля
@@ -12,11 +13,11 @@
  **/
 class GetHelpWidget extends YWidget
 {
-    public $view = 'gethelpwidget';
+	public $view = 'gethelpwidget';
 
-    public function run()
-    {
-        $this->render($this->view);
-    }
+	public function run()
+	{
+		$this->render($this->view);
+	}
 
 }

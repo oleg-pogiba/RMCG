@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Экшн, отвечающий за авторизацию пользователя
  *
@@ -11,55 +12,55 @@
  *
  **/
 class LoginAction extends CAction
-{   
-    public function run()
-    {
-        if (Yii::app()->user->isAuthenticated()) {
-            $this->controller->redirect(Yii::app()->user->returnUrl);
-        }
+{
+	public function run()
+	{
+		if (Yii::app()->user->isAuthenticated()) {
+			$this->controller->redirect(Yii::app()->user->returnUrl);
+		}
 
-        /**
-         * Если было совершено больше 3х попыток входа
-         * в систему, используем сценарий с капчей:
-         **/
+		/**
+		 * Если было совершено больше 3х попыток входа
+		 * в систему, используем сценарий с капчей:
+		 **/
 
-        $badLoginCount = Yii::app()->authenticationManager->getBadLoginCount(Yii::app()->user);
+		$badLoginCount = Yii::app()->authenticationManager->getBadLoginCount(Yii::app()->user);
 
-        //@TODO 3 вынести в настройки модуля
-        $scenario = $badLoginCount > 3 ? 'loginLimit' : '';
+		//@TODO 3 вынести в настройки модуля
+		$scenario = $badLoginCount > 3 ? 'loginLimit' : '';
 
-        $form = new LoginForm($scenario);
+		$form = new LoginForm($scenario);
 
-        if (Yii::app()->getRequest()->getIsPostRequest() && !empty($_POST['LoginForm'])) {
+		if (Yii::app()->getRequest()->getIsPostRequest() && !empty($_POST['LoginForm'])) {
 
-            $form->setAttributes(Yii::app()->request->getPost('LoginForm'));
+			$form->setAttributes(Yii::app()->request->getPost('LoginForm'));
 
-            if ($form->validate() && Yii::app()->authenticationManager->login($form, Yii::app()->user, Yii::app()->request)) {
+			if ($form->validate() && Yii::app()->authenticationManager->login($form, Yii::app()->user, Yii::app()->request)) {
 
-                Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
-                    Yii::t('UserModule.user', 'You authorized successfully!')
-                );
+				Yii::app()->user->setFlash(
+					YFlashMessages::SUCCESS_MESSAGE,
+					Yii::t('UserModule.user', 'You authorized successfully!')
+				);
 
-                $module = Yii::app()->getModule('user');
+				$module = Yii::app()->getModule('user');
 
-                $redirect = (Yii::app()->user->isSuperUser() && $module->loginAdminSuccess)
-                    ? array($module->loginAdminSuccess)
-                    : empty($module->loginSuccess) ? Yii::app()->baseUrl : array($module->loginSuccess);
+				$redirect = (Yii::app()->user->isSuperUser() && $module->loginAdminSuccess)
+					? array($module->loginAdminSuccess)
+					: empty($module->loginSuccess) ? Yii::app()->baseUrl : array($module->loginSuccess);
 
-                Yii::app()->authenticationManager->setBadLoginCount(Yii::app()->user, 0);                
+				Yii::app()->authenticationManager->setBadLoginCount(Yii::app()->user, 0);
 
-                $this->controller->redirect($redirect);
+				$this->controller->redirect($redirect);
 
-            } else {
+			} else {
 
-                $form->addError('hash', Yii::t('UserModule.user', 'Email or password was typed wrong!'));
+				$form->addError('hash', Yii::t('UserModule.user', 'Email or password was typed wrong!'));
 
-                Yii::app()->authenticationManager->setBadLoginCount(Yii::app()->user, $badLoginCount + 1);
+				Yii::app()->authenticationManager->setBadLoginCount(Yii::app()->user, $badLoginCount + 1);
 
-            }
-        }
+			}
+		}
 
-        $this->controller->render($this->id, array('model' => $form));
-    }
+		$this->controller->render($this->id, array('model' => $form));
+	}
 }

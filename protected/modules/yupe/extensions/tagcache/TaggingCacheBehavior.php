@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tagging cache behavior class:
  *
@@ -13,26 +14,26 @@
 class TaggingCacheBehavior extends CBehavior
 {
 
-    const PREFIX = '__tag__';
+	const PREFIX = '__tag__';
 
-    /**
-     * Инвалидирует данные, помеченные тегом(ами)
-     *
-     * @param string $tags - теги кеша
-     * 
-     * @return void
-     */
-    public function clear($tags)
-    {
-        foreach ((array) $tags as $tag)
-            $this->owner->set(self::PREFIX . $tag, microtime(true));
+	/**
+	 * Инвалидирует данные, помеченные тегом(ами)
+	 *
+	 * @param string $tags - теги кеша
+	 *
+	 * @return void
+	 */
+	public function clear($tags)
+	{
+		foreach ((array)$tags as $tag)
+			$this->owner->set(self::PREFIX . $tag, microtime(true));
 
-        Yii::log(
-            Yii::t(
-                'YupeModule.yupe', 'Invalidated tags: {tags}', array(
-                    '{tags}' => implode(', ', (array) $tags)
-                )
-            )
-        );
-    }
+		Yii::log(
+			Yii::t(
+				'YupeModule.yupe', 'Invalidated tags: {tags}', array(
+					'{tags}' => implode(', ', (array)$tags)
+				)
+			)
+		);
+	}
 }

@@ -1,9 +1,11 @@
 <?php
 Yii::import('zii.widgets.CMenu');
+
 /**
  * ETagListWidget
  */
-class ETagListWidget extends CMenu {
+class ETagListWidget extends CMenu
+{
 	/**
 	 * Model with ETaggableBehavior attached
 	 */
@@ -49,66 +51,64 @@ class ETagListWidget extends CMenu {
 	 */
 	public $criteria = null;
 
-	function init(){
-		if(!isset($this->htmlOptions['class'])) $this->htmlOptions['class'] = 'tags';
+	function init()
+	{
+		if (!isset($this->htmlOptions['class'])) $this->htmlOptions['class'] = 'tags';
 
 		$tags = array();
 
 		$criteria = new CDbCriteria();
 		$criteria->order = $this->model->{$this->field}->tagTableName;
-		
-		if($this->all){
-			if($this->count){
-				$criteria->having = 'count>='.(int)$this->countLimit;
-				if($this->criteria)
+
+		if ($this->all) {
+			if ($this->count) {
+				$criteria->having = 'count>=' . (int)$this->countLimit;
+				if ($this->criteria)
 					$criteria->mergeWith($this->criteria);
 				$tags = $this->model->{$this->field}->getAllTagsWithModelsCount($criteria);
-			}
-			else {
-				if($this->criteria)
+			} else {
+				if ($this->criteria)
 					$criteria->mergeWith($this->criteria);
 
 				$tags = $this->model->{$this->field}->getAllTags($criteria);
 			}
-		}
-		else {
-			if($this->count){
-				$criteria->having = 'count>='.(int)$this->countLimit;
-				if($this->criteria)
-					$criteria->mergeWith($this->criteria);				
+		} else {
+			if ($this->count) {
+				$criteria->having = 'count>=' . (int)$this->countLimit;
+				if ($this->criteria)
+					$criteria->mergeWith($this->criteria);
 				$tags = $this->model->{$this->field}->getTagsWithModelsCount($criteria);
-			}
-			else {
-				if($this->criteria)
+			} else {
+				if ($this->criteria)
 					$criteria->mergeWith($this->criteria);
 
 				$tags = $this->model->{$this->field}->getTags($criteria);
-			}			
+			}
 		}
 
-		foreach($tags as $tag){
+		foreach ($tags as $tag) {
 			$url = (array)$this->url;
-			
-			if(is_array($tag)){
+
+			if (is_array($tag)) {
 				$url[$this->urlParamName] = $tag['name'];
 				$this->items[] = array(
-					'label' => CHtml::encode($tag['name']).' <span>'.$tag['count'].'</span>',
+					'label' => CHtml::encode($tag['name']) . ' <span>' . $tag['count'] . '</span>',
 					'url' => $url,
 				);
-			}
-			else {
+			} else {
 				$url[$this->urlParamName] = $tag;
 				$this->items[] = array(
 					'label' => CHtml::encode($tag),
 					'url' => $url,
 				);
 			}
-		}		
+		}
 
-		parent::init();		
+		parent::init();
 	}
-	
-	function run(){
-		$this->renderMenu($this->items);		
-	}	
+
+	function run()
+	{
+		$this->renderMenu($this->items);
+	}
 }

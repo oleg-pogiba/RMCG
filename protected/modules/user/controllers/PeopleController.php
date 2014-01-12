@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Контроллер, отвечающий за отображение списка пользователей и профиля пользователя в публичной части сайта
  *
@@ -12,30 +13,30 @@
  **/
 class PeopleController extends yupe\components\controllers\FrontController
 {
-    // Вывод публичной страницы всех пользователей
-    public function actionIndex()
-    {
-        $users = new User('search');
-        $users->unsetAttributes();
-        $users->status = User::STATUS_ACTIVE;
-        $users->pageSize = (int)$this->module->usersPerPage;
+	// Вывод публичной страницы всех пользователей
+	public function actionIndex()
+	{
+		$users = new User('search');
+		$users->unsetAttributes();
+		$users->status = User::STATUS_ACTIVE;
+		$users->pageSize = (int)$this->module->usersPerPage;
 
-        if(isset($_GET['User']['nick_name'])) {
-            $users->nick_name = CHtml::encode($_GET['User']['nick_name']);
-        }
+		if (isset($_GET['User']['nick_name'])) {
+			$users->nick_name = CHtml::encode($_GET['User']['nick_name']);
+		}
 
-        $this->render('index', array('users' => $users));
-    }
+		$this->render('index', array('users' => $users));
+	}
 
-    // Вывод публичной страницы пользователя
-    public function actionUserInfo($username)
-    {
-        $user = User::model()->findByAttributes(array("nick_name" => $username));
+	// Вывод публичной страницы пользователя
+	public function actionUserInfo($username)
+	{
+		$user = User::model()->findByAttributes(array("nick_name" => $username));
 
-        if (!$user) {
-            throw new CHttpException(404, Yii::t('UserModule.user', 'User was not found'));
-        }
+		if (!$user) {
+			throw new CHttpException(404, Yii::t('UserModule.user', 'User was not found'));
+		}
 
-        $this->render('userInfo', array('user' => $user));
-    }
+		$this->render('userInfo', array('user' => $user));
+	}
 }

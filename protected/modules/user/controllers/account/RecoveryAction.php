@@ -15,54 +15,54 @@ use yupe\components\WebModule;
 
 class RecoveryAction extends CAction
 {
-    public function run()
-    {
-        // Незачем выполнять последующие действия
-        // для авторизованного пользователя:
-        if (Yii::app()->user->isAuthenticated()) {
-            $this->controller->redirect(
-                Yii::app()->getUser()->getReturnUrl()
-            );
-        }
+	public function run()
+	{
+		// Незачем выполнять последующие действия
+		// для авторизованного пользователя:
+		if (Yii::app()->user->isAuthenticated()) {
+			$this->controller->redirect(
+				Yii::app()->getUser()->getReturnUrl()
+			);
+		}
 
-        $module = Yii::app()->getModule('user');
+		$module = Yii::app()->getModule('user');
 
-        // Если восстановление отключено - ошбочка ;)
-        if ($module->recoveryDisabled) {
-            throw new CHttpException(
-                404,
-                Yii::t('UserModule.user', 'requested page was not found!')
-            );
-        }
+		// Если восстановление отключено - ошбочка ;)
+		if ($module->recoveryDisabled) {
+			throw new CHttpException(
+				404,
+				Yii::t('UserModule.user', 'requested page was not found!')
+			);
+		}
 
-        // Новая форма восстановления пароля:
-        $form = new RecoveryForm;
+		// Новая форма восстановления пароля:
+		$form = new RecoveryForm;
 
-        if (($data = Yii::app()->getRequest()->getPost('RecoveryForm')) !== null) {
+		if (($data = Yii::app()->getRequest()->getPost('RecoveryForm')) !== null) {
 
-            $form->setAttributes($data);
+			$form->setAttributes($data);
 
-            if ($form->validate() && Yii::app()->userManager->passwordRecovery($form->email)) {
+			if ($form->validate() && Yii::app()->userManager->passwordRecovery($form->email)) {
 
-                Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
-                    Yii::t(
-                        'UserModule.user',
-                        'Letter with password recovery instructions was sent on email which you choose during register'
-                    )
-                );
+				Yii::app()->user->setFlash(
+					YFlashMessages::SUCCESS_MESSAGE,
+					Yii::t(
+						'UserModule.user',
+						'Letter with password recovery instructions was sent on email which you choose during register'
+					)
+				);
 
-                $this->controller->redirect(array('/user/account/login'));
+				$this->controller->redirect(array('/user/account/login'));
 
-            } else {
+			} else {
 
-                Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
-                    Yii::t('UserModule.user', 'Password recovery error.')
-                );
-            }
-        }
+				Yii::app()->user->setFlash(
+					YFlashMessages::ERROR_MESSAGE,
+					Yii::t('UserModule.user', 'Password recovery error.')
+				);
+			}
+		}
 
-        $this->controller->render('recovery', array('model' => $form));
-    }
+		$this->controller->render('recovery', array('model' => $form));
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DocsBackendController - Класс для отображения файлов документации:
  *
@@ -12,61 +13,61 @@
  **/
 class DocsBackendController extends yupe\components\controllers\BackController
 {
-    /**
-     * Инициализация контроллера:
-     *
-     * @return parent::init()
-     **/
-    public function init()
-    {
-        $this->menu = array(
-            array('icon' => 'file', 'label' => Yii::t('DocsModule.docs', 'About module'), 'url' => array('/docs/docsBackend/index')),
-            '',
-            array(
-                'label' => Yii::t('DocsModule.docs', 'Files'), 'items' => $this->module->renderProjectDocs()
-            ),
-        );
+	/**
+	 * Инициализация контроллера:
+	 *
+	 * @return parent::init()
+	 **/
+	public function init()
+	{
+		$this->menu = array(
+			array('icon' => 'file', 'label' => Yii::t('DocsModule.docs', 'About module'), 'url' => array('/docs/docsBackend/index')),
+			'',
+			array(
+				'label' => Yii::t('DocsModule.docs', 'Files'), 'items' => $this->module->renderProjectDocs()
+			),
+		);
 
-        return parent::init();
-    }
+		return parent::init();
+	}
 
-    /**
-     * Экшен главной страницы:
-     *
-     * @return void
-     **/
-    public function actionIndex()
-    {
-        $this->render('index');
-    }
+	/**
+	 * Экшен главной страницы:
+	 *
+	 * @return void
+	 **/
+	public function actionIndex()
+	{
+		$this->render('index');
+	}
 
-    /**
-     * Экшен отрисовки статических файлов проекта:
-     *
-     * @param string $file - файл для рендеринга
-     *
-     * @return void
-     *
-     * @throws CHttpException
-     **/
-    public function actionShow($file = null)
-    {
+	/**
+	 * Экшен отрисовки статических файлов проекта:
+	 *
+	 * @param string $file - файл для рендеринга
+	 *
+	 * @return void
+	 *
+	 * @throws CHttpException
+	 **/
+	public function actionShow($file = null)
+	{
 
-        if (($fileName = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $file) && !file_exists($fileName))
-            throw new CHttpException(404, Yii::t('DocsModule.docs', 'Docs page was not found'));
+		if (($fileName = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $file) && !file_exists($fileName))
+			throw new CHttpException(404, Yii::t('DocsModule.docs', 'Docs page was not found'));
 
-        $content = $this->module->renderMarkdown($fileName);
+		$content = $this->module->renderMarkdown($fileName);
 
-        $this->pageTitle = ($title = $this->module->getDocTitle($content)) !== null
-                           ? $title
-                           : $file;
+		$this->pageTitle = ($title = $this->module->getDocTitle($content)) !== null
+			? $title
+			: $file;
 
-        $this->render(
-            'show', array(
-                'content' => $content,
-                'title'   => $title,
-            )
-        );
+		$this->render(
+			'show', array(
+				'content' => $content,
+				'title' => $title,
+			)
+		);
 
-    }
+	}
 }

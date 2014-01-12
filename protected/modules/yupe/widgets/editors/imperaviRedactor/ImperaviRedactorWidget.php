@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ImperaviRedactorWidget class file.
  *
@@ -73,17 +74,17 @@ class ImperaviRedactorWidget extends CInputWidget
 	{
 		// Prepare script package.
 		$this->package = array_merge(array(
-				'baseUrl' => $this->getAssetsUrl(),
-				'js' => array(
-					YII_DEBUG ? 'redactor.js' : 'redactor.min.js',
-				),
-				'css' => array(
-					'redactor.css',
-				),
-				'depends' => array(
-					'jquery',
-				),
-			), $this->package);
+			'baseUrl' => $this->getAssetsUrl(),
+			'js' => array(
+				YII_DEBUG ? 'redactor.js' : 'redactor.min.js',
+			),
+			'css' => array(
+				'redactor.css',
+			),
+			'depends' => array(
+				'jquery',
+			),
+		), $this->package);
 
 		// Append language file to script package.
 		if (isset($this->options['lang']) && $this->options['lang'] !== 'en') {
@@ -133,7 +134,7 @@ class ImperaviRedactorWidget extends CInputWidget
 	 */
 	public function getAssetsPath()
 	{
-		return  dirname(__FILE__) . '/assets';
+		return dirname(__FILE__) . '/assets';
 	}
 
 	/**

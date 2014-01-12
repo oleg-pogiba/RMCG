@@ -1,4 +1,5 @@
 <?php
+
 /**
  * YQueueInterface интерфейс для всех очередей
  *
@@ -10,6 +11,7 @@
  */
 interface YQueueInterface
 {
-    public function add($worker, array $task);
-    public function flush($worker = null);
+	public function add($worker, array $task);
+
+	public function flush($worker = null);
 }

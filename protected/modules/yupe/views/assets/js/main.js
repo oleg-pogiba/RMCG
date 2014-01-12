@@ -1,9 +1,9 @@
-jQuery(document).ready(function($){
+jQuery(document).ready(function ($) {
     // Сериализация формы в объект:
-    $.fn.serializeObject = function() {
+    $.fn.serializeObject = function () {
         var o = {};
         var a = this.serializeArray();
-        $.each(a, function() {
+        $.each(a, function () {
             if (o[this.name]) {
                 if (!o[this.name].push) {
                     o[this.name] = [o[this.name]];
@@ -18,15 +18,15 @@ jQuery(document).ready(function($){
 
     $('body').addClass('admin-panel');
 
-    $('.popover-help').popover({ trigger : 'hover', delay : 500, html: true });
+    $('.popover-help').popover({ trigger: 'hover', delay: 500, html: true });
     /**
      * Ajax-управление статусами модулей:
      **/
-    $(document).on('click', '.changeStatus', function() {
+    $(document).on('click', '.changeStatus', function () {
         if ((link = this) === undefined || (method = $(this).attr('method')) === undefined || (message = actionToken.messages['confirm_' + method]) === undefined)
             bootbox.confirm(actionToken.messages['unknown']);
         else {
-            bootbox.confirm(message, actionToken.buttons['no'], actionToken.buttons['yes'], function(result) {
+            bootbox.confirm(message, actionToken.buttons['no'], actionToken.buttons['yes'], function (result) {
                 if (result) {
                     sendModuleStatus($(link).attr('module'), $(link).attr('status'));
                 }
@@ -37,11 +37,11 @@ jQuery(document).ready(function($){
     /**
      * Ajax-управление сбросом кеша и ресурсов (assets):
      **/
-    $(document).on('click', '.flushAction', function() {
+    $(document).on('click', '.flushAction', function () {
         if ((link = this) === undefined || (method = $(this).attr('method')) === undefined || (message = actionToken.messages['confirm_' + method]) === undefined)
             bootbox.confirm(actionToken.messages['unknown']);
         else {
-            bootbox.confirm(message, actionToken.buttons['no'], actionToken.buttons['yes'], function(result) {
+            bootbox.confirm(message, actionToken.buttons['no'], actionToken.buttons['yes'], function (result) {
                 if (result) {
                     sendFlush(link);
                 }
@@ -53,20 +53,20 @@ jQuery(document).ready(function($){
     /**
      * Ajax-перехватчик для повторной отправки письма активации:
      */
-    $(document).on('click', '.user.sendactivation', function(){
+    $(document).on('click', '.user.sendactivation', function () {
         var link = $(this);
         $.ajax({
             url: link.attr('href'),
             data: actionToken.token,
             dataType: 'json',
             type: 'post',
-            success: function(data) {
+            success: function (data) {
                 if (typeof data.data != 'undefined' && typeof data.result != 'undefined')
                     bootbox.alert('<i class=" icon-' + (data.result ? 'ok' : 'remove') + '-sign"></i> ' + data.data);
                 else
                     bootbox.alert('<i class="icon-remove-sign"></i> ' + actionToken.error);
             },
-            error: function(data) {
+            error: function (data) {
                 if (typeof data.data != 'undefined' && typeof data.result != 'undefined')
                     bootbox.alert('<i class=" icon-' + (data.result ? 'ok' : 'remove') + '-sign"></i> ' + data.data);
                 else
@@ -80,9 +80,9 @@ jQuery(document).ready(function($){
 function ajaxSetStatus(elem, id) {
     $.ajax({
         url: $(elem).attr('href'),
-        success: function() {
-            $('#'+id).yiiGridView.update(id, {
-                data : $('#'+id+'>.keys').attr('title')
+        success: function () {
+            $('#' + id).yiiGridView.update(id, {
+                data: $('#' + id + '>.keys').attr('title')
             });
         }
     });
@@ -91,8 +91,8 @@ function ajaxSetStatus(elem, id) {
 function ajaxSetSort(elem, id) {
     $.ajax({
         url: $(elem).attr('href'),
-        success: function() {
-            $('#'+id).yiiGridView.update(id);
+        success: function () {
+            $('#' + id).yiiGridView.update(id);
         }
     });
 }
@@ -118,15 +118,15 @@ function sendFlush(link) {
         data: dataArray.join('&'),
         type: 'POST',
         dataType: 'json',
-        error: function(data) {
+        error: function (data) {
             $(myDialog).find('.modal-body').html(
                 typeof data.data == 'undefined' ? actionToken.error : data.data
             );
             $(myDialog).find('div.modal-footer a.btn').show();
             $(myDialog).find('div.modal-footer img').hide();
         },
-        success: function(data) {
-            if (typeof data.result != 'undefined' && typeof data.data != 'undefined' && data.result === true ) {
+        success: function (data) {
+            if (typeof data.result != 'undefined' && typeof data.data != 'undefined' && data.result === true) {
                 $(myDialog).find('.modal-body').html(data.data);
             } else {
                 $(myDialog).find('.modal-body').html(
@@ -136,7 +136,7 @@ function sendFlush(link) {
             $(myDialog).find('div.modal-footer a.btn').show();
             $(myDialog).find('div.modal-footer img').hide();
             // При клике на кнопку - перегружаем страницу:
-            $(myDialog).find('div.modal-footer a.btn').click(function() {
+            $(myDialog).find('div.modal-footer a.btn').click(function () {
                 location.reload();
             });
         }
@@ -165,8 +165,8 @@ function sendModuleStatus(name, status) {
         data: dataArray.join('&'),
         type: 'POST',
         dataType: 'json',
-        error: function(data) {
-            if (typeof data.result != 'undefined' && typeof data.data != 'undefined' && data.result === true ) {
+        error: function (data) {
+            if (typeof data.result != 'undefined' && typeof data.data != 'undefined' && data.result === true) {
                 $(myDialog).find('.modal-body').html(data.data);
             } else {
                 $(myDialog).find('.modal-body').html(
@@ -176,12 +176,12 @@ function sendModuleStatus(name, status) {
             $(myDialog).find('div.modal-footer a.btn').show();
             $(myDialog).find('div.modal-footer img').hide();
             // При клике на кнопку - перегружаем страницу:
-            $(myDialog).find('div.modal-footer a.btn').click(function() {
+            $(myDialog).find('div.modal-footer a.btn').click(function () {
                 location.reload();
             });
         },
-        success: function(data) {
-            if (typeof data.result != 'undefined' && typeof data.data != 'undefined' && data.result === true ) {
+        success: function (data) {
+            if (typeof data.result != 'undefined' && typeof data.data != 'undefined' && data.result === true) {
                 $(myDialog).find('.modal-body').html(data.data);
             } else {
                 $(myDialog).find('.modal-body').html(
@@ -191,7 +191,7 @@ function sendModuleStatus(name, status) {
             $(myDialog).find('div.modal-footer a.btn').show();
             $(myDialog).find('div.modal-footer img').hide();
             // При клике на кнопку - перегружаем страницу:
-            $(myDialog).find('div.modal-footer a.btn').click(function() {
+            $(myDialog).find('div.modal-footer a.btn').click(function () {
                 location.reload();
             });
         }

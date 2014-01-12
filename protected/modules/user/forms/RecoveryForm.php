@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Форма для запроса смены пароля
  *
@@ -12,36 +13,36 @@
  **/
 class RecoveryForm extends CFormModel
 {
-    public $email;
+	public $email;
 
-    public function rules()
-    {
-        return array(
-            array('email', 'required'),
-            array('email', 'email'),
-            array('email', 'checkEmail'),
-        );
-    }
+	public function rules()
+	{
+		return array(
+			array('email', 'required'),
+			array('email', 'email'),
+			array('email', 'checkEmail'),
+		);
+	}
 
-    public function checkEmail($attribute, $params)
-    {
-        if ($this->hasErrors() === false) {
-            $user = User::model()->active()->find(
-                'email = :email', array(
-                    ':email' => $this->$attribute
-                )
-            );
+	public function checkEmail($attribute, $params)
+	{
+		if ($this->hasErrors() === false) {
+			$user = User::model()->active()->find(
+				'email = :email', array(
+					':email' => $this->$attribute
+				)
+			);
 
-            if ($user === null) {
-                $this->addError(
-                    '',
-                    Yii::t(
-                        'UserModule.user', 'Email "{email}" was not found or user was blocked !', array(
-                            '{email}' => $this->email
-                        )
-                    )
-                );
-            }
-        }
-    }
+			if ($user === null) {
+				$this->addError(
+					'',
+					Yii::t(
+						'UserModule.user', 'Email "{email}" was not found or user was blocked !', array(
+							'{email}' => $this->email
+						)
+					)
+				);
+			}
+		}
+	}
 }

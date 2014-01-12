@@ -2,10 +2,10 @@
 
 <p><strong>Original</strong></p>
 <p>
-<img src="/src/examples/test.jpg" />
+	<img src="/src/examples/test.jpg"/>
 </p>
 
 <p><strong>Modified</strong></p>
 <p>
-<img src="/src/PHPThumb.php?src=/src/examples/test.jpg&w=200" />
+	<img src="/src/PHPThumb.php?src=/src/examples/test.jpg&w=200"/>
 </p>

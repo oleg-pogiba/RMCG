@@ -1,4 +1,5 @@
 <?php
+
 /**
  * m130115_155600_columns_rename install migration
  * Класс миграций для модуля Page:
@@ -10,16 +11,16 @@
  */
 class m130115_155600_columns_rename extends yupe\components\DbMigration
 {
-    public function safeUp()
-    {
-        $this->renameColumn('{{page_page}}', 'menu_order', 'order');
-        $this->renameColumn('{{page_page}}', 'name', 'title_short');
-    }
+	public function safeUp()
+	{
+		$this->renameColumn('{{page_page}}', 'menu_order', 'order');
+		$this->renameColumn('{{page_page}}', 'name', 'title_short');
+	}
 
 
-    public function safeDown()
-    {
-        $this->renameColumn('{{page_page}}', 'order', 'menu_order');
-        $this->renameColumn('{{page_page}}', 'title_short', 'name');
-    }
+	public function safeDown()
+	{
+		$this->renameColumn('{{page_page}}', 'order', 'menu_order');
+		$this->renameColumn('{{page_page}}', 'title_short', 'name');
+	}
 }

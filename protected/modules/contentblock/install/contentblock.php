@@ -9,10 +9,10 @@
  * @link     http://yupe.ru
  **/
 return array(
-    'module'   => array(
-        'class' => 'application.modules.contentblock.ContentBlockModule',
-    ),
-    'import'    => array(),
-    'component' => array(),
-    'rules'     => array(),
+	'module' => array(
+		'class' => 'application.modules.contentblock.ContentBlockModule',
+	),
+	'import' => array(),
+	'component' => array(),
+	'rules' => array(),
 );

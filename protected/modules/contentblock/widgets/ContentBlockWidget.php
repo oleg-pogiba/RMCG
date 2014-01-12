@@ -10,63 +10,63 @@
  *
  **/
 Yii::import('application.modules.contentblock.models.ContentBlock');
- 
+
 class ContentBlockWidget extends YWidget
 {
-    public $code;
-    public $silent = false;
-    public $view = 'contentblock';
+	public $code;
+	public $silent = false;
+	public $view = 'contentblock';
 
-    public function init()
-    {
-        if (empty($this->code))
-            throw new CException(Yii::t('ContentBlockModule.contentblock', 'Insert content block title for ContentBlockWidget!'));
-        
-        $this->silent = (bool)$this->silent;
-    }
+	public function init()
+	{
+		if (empty($this->code))
+			throw new CException(Yii::t('ContentBlockModule.contentblock', 'Insert content block title for ContentBlockWidget!'));
 
-    public function run()
-    {
-        $cacheName = "ContentBlock{$this->code}" . Yii::app()->language;
+		$this->silent = (bool)$this->silent;
+	}
 
-        $output = Yii::app()->cache->get($cacheName);
+	public function run()
+	{
+		$cacheName = "ContentBlock{$this->code}" . Yii::app()->language;
 
-        if ($output === false) {
+		$output = Yii::app()->cache->get($cacheName);
 
-            $block = ContentBlock::model()->find('code = :code', array(':code' => $this->code));
+		if ($output === false) {
 
-            if (null === $block) {
-                if ($this->silent === false) {
-                    throw new CException(
-                        Yii::t(
-                            'ContentBlockModule.contentblock', 'Content block "{code}" was not found !', array(
-                                '{code}' => $this->code
-                            )
-                        )
-                    );
-                }
+			$block = ContentBlock::model()->find('code = :code', array(':code' => $this->code));
 
-                $output = '';
+			if (null === $block) {
+				if ($this->silent === false) {
+					throw new CException(
+						Yii::t(
+							'ContentBlockModule.contentblock', 'Content block "{code}" was not found !', array(
+								'{code}' => $this->code
+							)
+						)
+					);
+				}
 
-            } else {
+				$output = '';
 
-                switch ($block->type) {
+			} else {
 
-                case ContentBlock::PHP_CODE:
-                    $output = eval($block->content);
-                    break;
-                case ContentBlock::SIMPLE_TEXT:
-                    $output = CHtml::encode($block->content);
-                    break;
-                case ContentBlock::HTML_TEXT:
-                    $output = $block->content;
-                    break;
-                }
-            }
+				switch ($block->type) {
 
-            Yii::app()->cache->set($cacheName, $output);
-        }
+					case ContentBlock::PHP_CODE:
+						$output = eval($block->content);
+						break;
+					case ContentBlock::SIMPLE_TEXT:
+						$output = CHtml::encode($block->content);
+						break;
+					case ContentBlock::HTML_TEXT:
+						$output = $block->content;
+						break;
+				}
+			}
 
-        $this->render($this->view, array('output' => $output));
-    }
+			Yii::app()->cache->set($cacheName, $output);
+		}
+
+		$this->render($this->view, array('output' => $output));
+	}
 }

@@ -10,14 +10,14 @@
  *
  **/
 return array(
-    'module'   => array(
-        'class' => 'application.modules.image.ImageModule',
-    ),
-    'import'    => array(
-        'application.modules.image.models.*',
-    ),
-    'component' => array(),
-    'rules'     => array(
-        '/images/<id:\d+>' => 'gallery/gallery/image/',
-    ),
+	'module' => array(
+		'class' => 'application.modules.image.ImageModule',
+	),
+	'import' => array(
+		'application.modules.image.models.*',
+	),
+	'component' => array(),
+	'rules' => array(
+		'/images/<id:\d+>' => 'gallery/gallery/image/',
+	),
 );

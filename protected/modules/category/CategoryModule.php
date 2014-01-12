@@ -11,129 +11,129 @@ use yupe\components\WebModule;
 
 class CategoryModule extends WebModule
 {
-    public $uploadPath = 'category';
+	public $uploadPath = 'category';
 
-    public function getUploadPath()
-    {
-        return Yii::getPathOfAlias('webroot') . '/' . Yii::app()->getModule('yupe')->uploadPath . '/' . $this->uploadPath . '/';
-    }
+	public function getUploadPath()
+	{
+		return Yii::getPathOfAlias('webroot') . '/' . Yii::app()->getModule('yupe')->uploadPath . '/' . $this->uploadPath . '/';
+	}
 
-    public function checkSelf()
-    {
-        $messages = array();
+	public function checkSelf()
+	{
+		$messages = array();
 
-        $uploadPath = $this->getUploadPath();
+		$uploadPath = $this->getUploadPath();
 
-        if (!is_writable($uploadPath))
-            $messages[WebModule::CHECK_ERROR][] = array(
-                'type'    => WebModule::CHECK_ERROR,
-                'message' => Yii::t('CategoryModule.category', 'Directory "{dir}" is available for write! {link}', array(
-                    '{dir}'  => $uploadPath,
-                    '{link}' => CHtml::link(Yii::t('CategoryModule.category', 'Change settings'), array(
-                        '/yupe/backend/modulesettings/',
-                        'module' => 'category',
-                    )),
-                )),
-            );
+		if (!is_writable($uploadPath))
+			$messages[WebModule::CHECK_ERROR][] = array(
+				'type' => WebModule::CHECK_ERROR,
+				'message' => Yii::t('CategoryModule.category', 'Directory "{dir}" is available for write! {link}', array(
+						'{dir}' => $uploadPath,
+						'{link}' => CHtml::link(Yii::t('CategoryModule.category', 'Change settings'), array(
+								'/yupe/backend/modulesettings/',
+								'module' => 'category',
+							)),
+					)),
+			);
 
-        return isset($messages[WebModule::CHECK_ERROR]) ? $messages : true;
-    }
+		return isset($messages[WebModule::CHECK_ERROR]) ? $messages : true;
+	}
 
-    public function getInstall()
-    {
-        if(parent::getInstall()){
-            @mkdir($this->getUploadPath(),0755);
-        }
+	public function getInstall()
+	{
+		if (parent::getInstall()) {
+			@mkdir($this->getUploadPath(), 0755);
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    public function getEditableParams()
-    {
-        return array(
-            'adminMenuOrder',
-            'uploadPath',
-        );
-    }
+	public function getEditableParams()
+	{
+		return array(
+			'adminMenuOrder',
+			'uploadPath',
+		);
+	}
 
-    public function getParamsLabels()
-    {
-        return array(
-            'adminMenuOrder' => Yii::t('CategoryModule.category', 'Menu items order'),
-            'uploadPath'     => Yii::t('CategoryModule.category', 'File uploading catalog (relatively Yii::app()->getModule("yupe")->uploadPath)'),
-        );
-    }
+	public function getParamsLabels()
+	{
+		return array(
+			'adminMenuOrder' => Yii::t('CategoryModule.category', 'Menu items order'),
+			'uploadPath' => Yii::t('CategoryModule.category', 'File uploading catalog (relatively Yii::app()->getModule("yupe")->uploadPath)'),
+		);
+	}
 
-    public function getIsInstallDefault()
-    {
-        return true;
-    }
+	public function getIsInstallDefault()
+	{
+		return true;
+	}
 
-    public function getVersion()
-    {
-        return Yii::t('CategoryModule.category', '0.6');
-    }
+	public function getVersion()
+	{
+		return Yii::t('CategoryModule.category', '0.6');
+	}
 
-    public function getCategory()
-    {
-        return Yii::t('CategoryModule.category', 'Structure');
-    }
+	public function getCategory()
+	{
+		return Yii::t('CategoryModule.category', 'Structure');
+	}
 
-    public function getName()
-    {
-        return Yii::t('CategoryModule.category', 'Categories/Sections');
-    }
+	public function getName()
+	{
+		return Yii::t('CategoryModule.category', 'Categories/Sections');
+	}
 
-    public function getDescription()
-    {
-        return Yii::t('CategoryModule.category', 'Module for categories/sections management');
-    }
+	public function getDescription()
+	{
+		return Yii::t('CategoryModule.category', 'Module for categories/sections management');
+	}
 
-    public function getAuthor()
-    {
-        return Yii::t('CategoryModule.category', 'yupe team');
-    }
+	public function getAuthor()
+	{
+		return Yii::t('CategoryModule.category', 'yupe team');
+	}
 
-    public function getAuthorEmail()
-    {
-        return Yii::t('CategoryModule.category', 'team@yupe.ru');
-    }
+	public function getAuthorEmail()
+	{
+		return Yii::t('CategoryModule.category', 'team@yupe.ru');
+	}
 
-    public function getUrl()
-    {
-        return Yii::t('CategoryModule.category', 'http://yupe.ru');
-    }
+	public function getUrl()
+	{
+		return Yii::t('CategoryModule.category', 'http://yupe.ru');
+	}
 
-    public function getIcon()
-    {
-        return 'folder-open';
-    }
+	public function getIcon()
+	{
+		return 'folder-open';
+	}
 
-    public function isMultiLang()
-    {
-        return true;
-    }
+	public function isMultiLang()
+	{
+		return true;
+	}
 
-    public function init()
-    {
-        parent::init();
+	public function init()
+	{
+		parent::init();
 
-        $this->setImport(array(
-            'category.models.*',
-            'category.components.*',
-        ));
-    }
+		$this->setImport(array(
+			'category.models.*',
+			'category.components.*',
+		));
+	}
 
-    public function getNavigation()
-    {
-        return array(
-            array('icon' => 'list-alt', 'label' => Yii::t('CategoryModule.category', 'Categories list'), 'url' => array('/category/categoryBackend/index')),
-            array('icon' => 'plus-sign', 'label' => Yii::t('CategoryModule.category', 'Create category'), 'url' => array('/category/categoryBackend/create')),
-        );
-    }
+	public function getNavigation()
+	{
+		return array(
+			array('icon' => 'list-alt', 'label' => Yii::t('CategoryModule.category', 'Categories list'), 'url' => array('/category/categoryBackend/index')),
+			array('icon' => 'plus-sign', 'label' => Yii::t('CategoryModule.category', 'Create category'), 'url' => array('/category/categoryBackend/create')),
+		);
+	}
 
-    public function getAdminPageLink()
-    {
-        return '/category/categoryBackend/index';
-    }
+	public function getAdminPageLink()
+	{
+		return '/category/categoryBackend/index';
+	}
 }

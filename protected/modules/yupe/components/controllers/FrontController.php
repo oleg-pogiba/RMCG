@@ -16,24 +16,24 @@ use Yii;
 
 class FrontController extends Controller
 {
-    /**
-     * Вызывается при инициализации FrontController
-     * Присваивает значения, необходимым переменным
-     */
-    public function init()
-    {
-        parent::init();
-        $this->pageTitle = $this->yupe->siteName;
-        $this->description = $this->yupe->siteDescription;
-        $this->keywords = $this->yupe->siteKeyWords;
-        if ($this->yupe->theme) {
-            Yii::app()->theme = $this->yupe->theme;
-            $bootstrap = Yii::app()->theme->basePath . DIRECTORY_SEPARATOR . "bootstrap.php";
-            if (is_file($bootstrap)) {
-                require($bootstrap);
-            }
-        } else {
-            Yii::app()->theme = 'default';
-        }
-    }
+	/**
+	 * Вызывается при инициализации FrontController
+	 * Присваивает значения, необходимым переменным
+	 */
+	public function init()
+	{
+		parent::init();
+		$this->pageTitle = $this->yupe->siteName;
+		$this->description = $this->yupe->siteDescription;
+		$this->keywords = $this->yupe->siteKeyWords;
+		if ($this->yupe->theme) {
+			Yii::app()->theme = $this->yupe->theme;
+			$bootstrap = Yii::app()->theme->basePath . DIRECTORY_SEPARATOR . "bootstrap.php";
+			if (is_file($bootstrap)) {
+				require($bootstrap);
+			}
+		} else {
+			Yii::app()->theme = 'default';
+		}
+	}
 }

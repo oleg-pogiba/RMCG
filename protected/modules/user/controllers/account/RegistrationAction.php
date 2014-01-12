@@ -15,47 +15,47 @@ use yupe\components\WebModule;
 
 class RegistrationAction extends CAction
 {
-    public function run()
-    {
-        if (Yii::app()->user->isAuthenticated()) {
-            $this->controller->redirect(Yii::app()->user->returnUrl);
-        }
+	public function run()
+	{
+		if (Yii::app()->user->isAuthenticated()) {
+			$this->controller->redirect(Yii::app()->user->returnUrl);
+		}
 
-        $module = Yii::app()->getModule('user');
+		$module = Yii::app()->getModule('user');
 
-        if ($module->registrationDisabled) {
-        	throw new CHttpException(404, Yii::t('UserModule.user', 'requested page was not found!'));
-        }
+		if ($module->registrationDisabled) {
+			throw new CHttpException(404, Yii::t('UserModule.user', 'requested page was not found!'));
+		}
 
-        $form = new RegistrationForm;
+		$form = new RegistrationForm;
 
-        $event = new CModelEvent($form);
+		$event = new CModelEvent($form);
 
-        $module->onBeginRegistration($event);
+		$module->onBeginRegistration($event);
 
-        if (($data = Yii::app()->getRequest()->getPost('RegistrationForm')) !== null) {
-            
-            $form->setAttributes($data);
+		if (($data = Yii::app()->getRequest()->getPost('RegistrationForm')) !== null) {
 
-            if ($form->validate()) {				
+			$form->setAttributes($data);
 
-				if(Yii::app()->userManager->createUser($form)) {
-					
-				    Yii::app()->user->setFlash(
+			if ($form->validate()) {
+
+				if (Yii::app()->userManager->createUser($form)) {
+
+					Yii::app()->user->setFlash(
 						YFlashMessages::SUCCESS_MESSAGE,
 						Yii::t('UserModule.user', 'Account was created! Check your email!')
 					);
-					
+
 					$this->controller->redirect(array($module->registrationSuccess));
 				}
 
-                Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
-                    Yii::t('UserModule.user', 'Error creating account!')
-                );
+				Yii::app()->user->setFlash(
+					YFlashMessages::ERROR_MESSAGE,
+					Yii::t('UserModule.user', 'Error creating account!')
+				);
 			}
-		}               
+		}
 
-        $this->controller->render('registration', array('model' => $form, 'module' => $module));
-    }
+		$this->controller->render('registration', array('model' => $form, 'module' => $module));
+	}
 }

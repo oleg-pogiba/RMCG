@@ -9,14 +9,14 @@
  *
  */
 return array(
-    'module'   => array(
-        'class'  => 'application.modules.page.PageModule',
-        // Указание здесь layout'a портит отображение на фронтенде:
-        //'layout' => '//layouts/column2',
-    ),
-    'import'    => array(),
-    'component' => array(),
-    'rules'     => array(
-        '/pages/<slug>' => 'page/page/show',
-    ),
+	'module' => array(
+		'class' => 'application.modules.page.PageModule',
+		// Указание здесь layout'a портит отображение на фронтенде:
+		//'layout' => '//layouts/column2',
+	),
+	'import' => array(),
+	'component' => array(),
+	'rules' => array(
+		'/pages/<slug>' => 'page/page/show',
+	),
 );

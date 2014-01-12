@@ -11,9 +11,9 @@
  * @link     http://yupe.ru
  **/
 return array(
-    'install' => true,
-    'rules'   => array(
-        // правила контроллера site
-        '/' =>'site/index'
-    ),
+	'install' => true,
+	'rules' => array(
+		// правила контроллера site
+		'/' => 'site/index'
+	),
 );

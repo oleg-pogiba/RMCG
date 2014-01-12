@@ -17,9 +17,9 @@ use Yii;
 
 class YUniqueSlugValidator extends CUniqueValidator
 {
-    protected function validateAttribute( $object, $attribute )
-    {
-        $this->criteria = array('condition' => 'lang = :lang', 'params' => array(':lang' => $object->lang));
-        return parent::validateAttribute( $object, $attribute );
-    }
+	protected function validateAttribute($object, $attribute)
+	{
+		$this->criteria = array('condition' => 'lang = :lang', 'params' => array(':lang' => $object->lang));
+		return parent::validateAttribute($object, $attribute);
+	}
 }

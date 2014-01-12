@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Экшн, отвечающий за разлогинивание пользователя
  *
@@ -12,10 +13,10 @@
  **/
 class LogOutAction extends CAction
 {
-    public function run()
-    {
-        Yii::app()->authenticationManager->logout(Yii::app()->user);
+	public function run()
+	{
+		Yii::app()->authenticationManager->logout(Yii::app()->user);
 
-        $this->controller->redirect(array(Yii::app()->getModule('user')->logoutSuccess));
-    }
+		$this->controller->redirect(array(Yii::app()->getModule('user')->logoutSuccess));
+	}
 }

@@ -19,21 +19,21 @@ use CCaptchaAction;
 class YCaptchaAction extends CCaptchaAction
 {
 
-    public $minLength = 3;
-    public $maxLength = 6;
+	public $minLength = 3;
+	public $maxLength = 6;
 
-    public function __construct($controller,$id)
-    {
-        parent::__construct($controller,$id);
+	public function __construct($controller, $id)
+	{
+		parent::__construct($controller, $id);
 
-        $module = $controller->getModule();
+		$module = $controller->getModule();
 
-        if(property_exists($module,"minCaptchaLength")) {
-            $this->minLength = $module->minCaptchaLength;
-        }
-        if(property_exists($module,"maxCaptchaLength")) {
-            $this->maxLength = $module->maxCaptchaLength;
-        }
-    }
+		if (property_exists($module, "minCaptchaLength")) {
+			$this->minLength = $module->minCaptchaLength;
+		}
+		if (property_exists($module, "maxCaptchaLength")) {
+			$this->maxLength = $module->maxCaptchaLength;
+		}
+	}
 
 }

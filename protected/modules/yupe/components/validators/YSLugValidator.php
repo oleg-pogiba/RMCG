@@ -13,16 +13,15 @@ use Yii;
 
 class YSLugValidator extends CValidator
 {
-    public function validateAttribute($object,$attribute)
-    {
-        $value = $object->$attribute;
+	public function validateAttribute($object, $attribute)
+	{
+		$value = $object->$attribute;
 
-        if (preg_match('/[^a-zA-Z0-9_\-]/', $value))
-        {
-            $message = ($this->message !== null)
-                ? $this->message
-                : Yii::t('YupeModule.yupe', '{attribute} have illegal characters');
-            $this->addError($object, $attribute, $message);
-        }
-    }
+		if (preg_match('/[^a-zA-Z0-9_\-]/', $value)) {
+			$message = ($this->message !== null)
+				? $this->message
+				: Yii::t('YupeModule.yupe', '{attribute} have illegal characters');
+			$this->addError($object, $attribute, $message);
+		}
+	}
 }

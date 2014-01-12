@@ -2,11 +2,11 @@
 /**
  * Search form generator:
  *
- *   @category YupeGiiTemplate
- *   @package  yupe
- *   @author   Yupe Team <team@yupe.ru>
- *   @license  https://github.com/yupe/yupe/blob/master/LICENSE BSD
- *   @link     http://yupe.ru
+ * @category YupeGiiTemplate
+ * @package  yupe
+ * @author   Yupe Team <team@yupe.ru>
+ * @license  https://github.com/yupe/yupe/blob/master/LICENSE BSD
+ * @link     http://yupe.ru
  **/
 echo <<<EOF
 <?php
@@ -31,24 +31,24 @@ echo <<<EOF
 EOF;
 ?>
 
-    <fieldset class="inline">
-        <div class="row-fluid control-group">
-<?php
-foreach ($this->tableSchema->columns as $column) {
-    $field = $this->generateInputField($this->modelClass, $column);
-    if (strpos($field, 'password') !== false)
-        continue;
+<fieldset class="inline">
+	<div class="row-fluid control-group">
+		<?php
+		foreach ($this->tableSchema->columns as $column) {
+			$field = $this->generateInputField($this->modelClass, $column);
+			if (strpos($field, 'password') !== false)
+				continue;
 
-    $activeRow = $this->generateActiveRow($this->modelClass, $column);
-    echo <<<EOF
+			$activeRow = $this->generateActiveRow($this->modelClass, $column);
+			echo <<<EOF
             <div class="span2">
                 <?php echo {$activeRow}; ?>
             </div>\n
 EOF;
-}
-?>
-        </div>
-    </fieldset>
+		}
+		?>
+	</div>
+</fieldset>
 
 <?php
 echo <<<EOF

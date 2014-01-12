@@ -11,14 +11,14 @@
  * Добавляем нужный CSS:
  */
 Yii::app()->clientScript->registerCssFile(
-    Yii::app()->assetManager->publish(
-        Yii::getPathOfAlias('application.modules.docs.views.assets') . '/css/main.css'
-    )
+	Yii::app()->assetManager->publish(
+		Yii::getPathOfAlias('application.modules.docs.views.assets') . '/css/main.css'
+	)
 );
 
-$this->breadcrumbs=array(
-    $this->module->name => array('index'),
-    $title
+$this->breadcrumbs = array(
+	$this->module->name => array('index'),
+	$title
 );
 
 echo $content;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * HpController контроллер публичной части модуля homepage
  *
@@ -9,51 +10,50 @@
  * @link     http://yupe.ru
  *
  **/
-
 class HpController extends yupe\components\controllers\FrontController
 {
 
-    /**
-     * Index action:
-     * 
-     * @return void
-     */
-    public function actionIndex()
-    {
-        $module = Yii::app()->getModule('homepage');
+	/**
+	 * Index action:
+	 *
+	 * @return void
+	 */
+	public function actionIndex()
+	{
+		$module = Yii::app()->getModule('homepage');
 
-        $view = $data = null;
+		$view = $data = null;
 
-        if($module->mode == HomepageModule::MODE_PAGE) {
-            $view = 'page';
+		if ($module->mode == HomepageModule::MODE_PAGE) {
+			$view = 'page';
 
-            $data = array(
-                'page' => Page::model()->findByPk($module->target)
-            );
-        }
+			$data = array(
+				'page' => Page::model()->findByPk($module->target)
+			);
+		}
 
-        if($module->mode == HomepageModule::MODE_POSTS) {
-            $view = 'posts';
+		if ($module->mode == HomepageModule::MODE_POSTS) {
+			$view = 'posts';
 
-            $dataProvider = new CActiveDataProvider(
-                'Post', array(
-                    'criteria'          => new CDbCriteria(
-                        array(
-                            'condition' => 't.status = :status',
-                            'params'    => array(':status' => Post::STATUS_PUBLISHED),
-                            'limit'     => $module->limit,
-                            'order'     => 't.id DESC',
-                            'with'      => array('createUser', 'blog','commentsCount'),
-                        )
-                    ),
-                )
-            );
+			$dataProvider = new CActiveDataProvider(
+				'Post', array(
+					'criteria' => new CDbCriteria(
+							array(
+								'condition' => 't.status = :status',
+								'params' => array(':status' => Post::STATUS_PUBLISHED),
+								'limit' => $module->limit,
+								'order' => 't.id DESC',
+								'with' => array('createUser', 'blog', 'commentsCount'),
+							)
+						),
+				)
+			);
 
-            $data = array(
-                'dataProvider' => $dataProvider
-            );
-        }
+			$data = array(
+				'dataProvider' => $dataProvider
+			);
+		}
 
-        $this->render($view, $data);
-    }
+		$this->render($view, $data);
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * YQueue базовый класс для всех очередей
  *
@@ -10,8 +11,8 @@
  */
 abstract class YQueue extends CApplicationComponent implements YQueueInterface
 {
-    public function init()
-    {
-        parent::init();
-    }
+	public function init()
+	{
+		parent::init();
+	}
 }

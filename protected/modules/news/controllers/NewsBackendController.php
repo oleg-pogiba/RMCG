@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NewsBackendController контроллер для работы с новостями в панели управления
  *
@@ -11,240 +12,240 @@
  */
 class NewsBackendController extends yupe\components\controllers\BackController
 {
-    /**
-     * Displays a particular model.
-     * 
-     * @param integer $id the ID of the model to be displayed
-     *
-     * @return void
-     */
-    public function actionView($id)
-    {
-        $this->render('view', array('model' => $this->loadModel($id)));
-    }
+	/**
+	 * Displays a particular model.
+	 *
+	 * @param integer $id the ID of the model to be displayed
+	 *
+	 * @return void
+	 */
+	public function actionView($id)
+	{
+		$this->render('view', array('model' => $this->loadModel($id)));
+	}
 
-    /**
-     * Creates a new model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     *
-     * @return void
-     */
-    public function actionCreate()
-    {
-        $model = new News;
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 *
+	 * @return void
+	 */
+	public function actionCreate()
+	{
+		$model = new News;
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
 
-        if (($data = Yii::app()->getRequest()->getPost('News')) !== null) {
-            
-            $model->setAttributes($data);
+		if (($data = Yii::app()->getRequest()->getPost('News')) !== null) {
 
-            if ($model->save()) {
-                
-                Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
-                    Yii::t('NewsModule.news', 'News article was created!')
-                );
+			$model->setAttributes($data);
 
-                $this->redirect(
-                    (array) Yii::app()->getRequest()->getPost(
-                        'submit-type', array('create')
-                    )
-                );
-            }
-        }
+			if ($model->save()) {
 
-        $languages = $this->yupe->getLanguagesList();
+				Yii::app()->user->setFlash(
+					YFlashMessages::SUCCESS_MESSAGE,
+					Yii::t('NewsModule.news', 'News article was created!')
+				);
 
-        //если добавляем перевод
-        $id = (int)Yii::app()->getRequest()->getQuery('id');
-        $lang = Yii::app()->getRequest()->getQuery('lang');
+				$this->redirect(
+					(array)Yii::app()->getRequest()->getPost(
+						'submit-type', array('create')
+					)
+				);
+			}
+		}
 
-        if (!empty($id) && !empty($lang)) {
-            $news = News::model()->findByPk($id);
-            
-            if (null === $news) {
-                Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
-                    Yii::t('NewsModule.news', 'Targeting news was not found!')
-                );
+		$languages = $this->yupe->getLanguagesList();
 
-                $this->redirect(array('/news/newsBackend/create'));
-            }
+		//если добавляем перевод
+		$id = (int)Yii::app()->getRequest()->getQuery('id');
+		$lang = Yii::app()->getRequest()->getQuery('lang');
 
-            if (!array_key_exists($lang,$languages)) {
-                Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
-                    Yii::t('NewsModule.news', 'Language was not found!')
-                );
+		if (!empty($id) && !empty($lang)) {
+			$news = News::model()->findByPk($id);
 
-                $this->redirect(array('/news/newsBackend/create'));
-            }
-            
-            Yii::app()->user->setFlash(
-                YFlashMessages::SUCCESS_MESSAGE,
-                Yii::t(
-                    'NewsModule.news', 'You inserting translation for {lang} language', array(
-                        '{lang}' => $languages[$lang]
-                    )
-                )
-            );
+			if (null === $news) {
+				Yii::app()->user->setFlash(
+					YFlashMessages::ERROR_MESSAGE,
+					Yii::t('NewsModule.news', 'Targeting news was not found!')
+				);
 
-            $model->lang        = $lang;
-            $model->alias       = $news->alias;
-            $model->date        = $news->date;
-            $model->category_id = $news->category_id;
-            $model->title       = $news->title;
-        } else {
-            $model->date = date('d.m.Y');
-            $model->lang = Yii::app()->language;
-        }
+				$this->redirect(array('/news/newsBackend/create'));
+			}
 
-        $this->render('create', array('model' => $model, 'languages' => $languages));
-    }
+			if (!array_key_exists($lang, $languages)) {
+				Yii::app()->user->setFlash(
+					YFlashMessages::ERROR_MESSAGE,
+					Yii::t('NewsModule.news', 'Language was not found!')
+				);
 
-    /**
-     * Updates a particular model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * 
-     * @param null $alias
-     * @param integer $id the ID of the model to be updated
-     * 
-     * @throws CHttpException
-     * 
-     * @return void
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->loadModel($id);
+				$this->redirect(array('/news/newsBackend/create'));
+			}
 
-        if (($data = Yii::app()->getRequest()->getPost('News')) !== null) {
-            
-            $model->setAttributes($data);
+			Yii::app()->user->setFlash(
+				YFlashMessages::SUCCESS_MESSAGE,
+				Yii::t(
+					'NewsModule.news', 'You inserting translation for {lang} language', array(
+						'{lang}' => $languages[$lang]
+					)
+				)
+			);
 
-            if ($model->save()) {
+			$model->lang = $lang;
+			$model->alias = $news->alias;
+			$model->date = $news->date;
+			$model->category_id = $news->category_id;
+			$model->title = $news->title;
+		} else {
+			$model->date = date('d.m.Y');
+			$model->lang = Yii::app()->language;
+		}
 
-                Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
-                    Yii::t('NewsModule.news', 'News article was updated!')
-                );
+		$this->render('create', array('model' => $model, 'languages' => $languages));
+	}
 
-                $this->redirect(
-                    Yii::app()->getRequest()->getIsPostRequest()
-                        ? (array) Yii::app()->getRequest()->getPost(
-                            'submit-type', array('update', 'id' => $model->id)
-                        )
-                        : array('view', 'id' => $model->id)
-                );
-            }
-        }
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 *
+	 * @param null $alias
+	 * @param integer $id the ID of the model to be updated
+	 *
+	 * @throws CHttpException
+	 *
+	 * @return void
+	 */
+	public function actionUpdate($id)
+	{
+		$model = $this->loadModel($id);
 
-        // найти по alias страницы на других языках
-        $langModels = News::model()->findAll(
-            'alias = :alias AND id != :id', array(
-                ':alias' => $model->alias,
-                ':id' => $model->id
-            )
-        );
+		if (($data = Yii::app()->getRequest()->getPost('News')) !== null) {
 
-        $this->render(
-            'update',array(
-                'langModels' => CHtml::listData($langModels, 'lang', 'id'),
-                'model'      => $model,
-                'languages'  => $this->yupe->getLanguagesList()
-            )
-        );
-    }
+			$model->setAttributes($data);
 
-    /**
-     * Deletes a particular model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * 
-     * @param null $alias
-     * @param integer $id the ID of the model to be deleted
-     * 
-     * @throws CHttpException
-     * 
-     * @return void
-     */
-    public function actionDelete($id = null)
-    {
-        if (Yii::app()->getRequest()->getIsPostRequest()) {
-            
-            $this->loadModel($id)->delete();
-            
-            Yii::app()->user->setFlash(
-                YFlashMessages::SUCCESS_MESSAGE,
-                Yii::t('NewsModule.news', 'Record was removed!')
-            );
+			if ($model->save()) {
 
-            // если это AJAX запрос ( кликнули удаление в админском grid view), мы не должны никуда редиректить
-            Yii::app()->getRequest()->getParam('ajax') !== null || $this->redirect(
-                (array) Yii::app()->getRequest()->getPost('returnUrl', 'index')
-            );
-        } else {
-            throw new CHttpException(
-                400,
-                Yii::t('NewsModule.news', 'Bad raquest. Please don\'t use similar requests anymore!')
-            );
-        }
-    }
+				Yii::app()->user->setFlash(
+					YFlashMessages::SUCCESS_MESSAGE,
+					Yii::t('NewsModule.news', 'News article was updated!')
+				);
 
-    /**
-     * Manages all models.
-     *
-     * @return void
-     */
-    public function actionIndex()
-    {
-        $model = new News('search');
-        
-        $model->unsetAttributes(); // clear any default values
-        
-        $model->setAttributes(
-            Yii::app()->getRequest()->getParam(
-                'News', array()
-            )
-        );
-        
-        $this->render('index', array('model' => $model));
-    }
+				$this->redirect(
+					Yii::app()->getRequest()->getIsPostRequest()
+						? (array)Yii::app()->getRequest()->getPost(
+						'submit-type', array('update', 'id' => $model->id)
+					)
+						: array('view', 'id' => $model->id)
+				);
+			}
+		}
 
-    /**
-     * Returns the data model based on the primary key given in the GET variable.
-     * If the data model is not found, an HTTP exception will be raised.
-     * 
-     * @param integer the ID of the model to be loaded
-     *
-     * @return void
-     *
-     * @throws CHttpException If record not found
-     */
-    public function loadModel($id)
-    {
-        if (($model = News::model()->findByPk($id)) === null) {
-            throw new CHttpException(
-                404,
-                Yii::t('NewsModule.news', 'Requested page was not found!')
-            );
-        }
-        
-        return $model;
-    }
+		// найти по alias страницы на других языках
+		$langModels = News::model()->findAll(
+			'alias = :alias AND id != :id', array(
+				':alias' => $model->alias,
+				':id' => $model->id
+			)
+		);
 
-    /**
-     * Performs the AJAX validation.
-     * 
-     * @param CModel the model to be validated
-     *
-     * @return void
-     */
-    protected function performAjaxValidation(News $model)
-    {
-        if (Yii::app()->getRequest()->getIsAjaxRequest() && Yii::app()->getRequest()->getPost('ajax') === 'news-form') {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }
-    }
+		$this->render(
+			'update', array(
+				'langModels' => CHtml::listData($langModels, 'lang', 'id'),
+				'model' => $model,
+				'languages' => $this->yupe->getLanguagesList()
+			)
+		);
+	}
+
+	/**
+	 * Deletes a particular model.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @param null $alias
+	 * @param integer $id the ID of the model to be deleted
+	 *
+	 * @throws CHttpException
+	 *
+	 * @return void
+	 */
+	public function actionDelete($id = null)
+	{
+		if (Yii::app()->getRequest()->getIsPostRequest()) {
+
+			$this->loadModel($id)->delete();
+
+			Yii::app()->user->setFlash(
+				YFlashMessages::SUCCESS_MESSAGE,
+				Yii::t('NewsModule.news', 'Record was removed!')
+			);
+
+			// если это AJAX запрос ( кликнули удаление в админском grid view), мы не должны никуда редиректить
+			Yii::app()->getRequest()->getParam('ajax') !== null || $this->redirect(
+				(array)Yii::app()->getRequest()->getPost('returnUrl', 'index')
+			);
+		} else {
+			throw new CHttpException(
+				400,
+				Yii::t('NewsModule.news', 'Bad raquest. Please don\'t use similar requests anymore!')
+			);
+		}
+	}
+
+	/**
+	 * Manages all models.
+	 *
+	 * @return void
+	 */
+	public function actionIndex()
+	{
+		$model = new News('search');
+
+		$model->unsetAttributes(); // clear any default values
+
+		$model->setAttributes(
+			Yii::app()->getRequest()->getParam(
+				'News', array()
+			)
+		);
+
+		$this->render('index', array('model' => $model));
+	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 *
+	 * @param integer the ID of the model to be loaded
+	 *
+	 * @return void
+	 *
+	 * @throws CHttpException If record not found
+	 */
+	public function loadModel($id)
+	{
+		if (($model = News::model()->findByPk($id)) === null) {
+			throw new CHttpException(
+				404,
+				Yii::t('NewsModule.news', 'Requested page was not found!')
+			);
+		}
+
+		return $model;
+	}
+
+	/**
+	 * Performs the AJAX validation.
+	 *
+	 * @param CModel the model to be validated
+	 *
+	 * @return void
+	 */
+	protected function performAjaxValidation(News $model)
+	{
+		if (Yii::app()->getRequest()->getIsAjaxRequest() && Yii::app()->getRequest()->getPost('ajax') === 'news-form') {
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
 }
