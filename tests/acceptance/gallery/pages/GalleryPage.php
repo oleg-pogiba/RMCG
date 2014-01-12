@@ -2,11 +2,11 @@
 
 class GalleryPage
 {
-    const ALBUMS_URL = '/albums';
+	const ALBUMS_URL = '/albums';
 
-    public static function getImageUrl($id)
-    {
-        return "/images/{$id}";
-    }
+	public static function getImageUrl($id)
+	{
+		return "/images/{$id}";
+	}
 
 }

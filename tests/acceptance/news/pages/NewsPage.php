@@ -2,10 +2,10 @@
 
 class NewsPage
 {
-    const URL = '/news';
+	const URL = '/news';
 
-    public static function route($alias)
-    {
-       return static::URL.'/'.$alias;
-    }
+	public static function route($alias)
+	{
+		return static::URL . '/' . $alias;
+	}
 }

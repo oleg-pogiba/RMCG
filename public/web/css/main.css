@@ -2,6 +2,7 @@
 .admin-panel .container {
     margin-top: 100px;
 }
+
 body {
     margin: 0;
     padding: 0;
@@ -287,6 +288,7 @@ div.search-form {
     background-color: #f85600;
     background-repeat: repeat-x;
 }
+
 .yupeDownload a {
     background: none repeat-x scroll 0 0 #F89200;
 
@@ -321,11 +323,9 @@ div.search-form {
     line-height: normal;
 }
 
-.siteDescription
-{
+.siteDescription {
     vertical-align: -20px;
 }
-
 
 div.form_reg_edit {
     width: 100%;
@@ -349,7 +349,7 @@ div.form_reg_edit fieldset {
 div.form_reg_edit label {
     font-weight: bold;
     font-size: 0.9em;
-    
+
 }
 
 div.form_reg_edit .row {
@@ -419,141 +419,122 @@ div.form_reg_edit .errorSummary ul {
     padding: 0 0 0 20px;
 }
 
-
-div.form_reg_edit div.re-left, div.form_reg_edit div.re-right
-{
-	float:left; 
-	clear:right;
+div.form_reg_edit div.re-left, div.form_reg_edit div.re-right {
+    float: left;
+    clear: right;
 }
 
-
-div.form_reg_edit div.list
-{
-	display: table;
-	border-width: 0 0 1px 0;
-	border-style: dotted;
-	border-color: #d4d4d4;
-	padding-bottom: 10px;
-	margin-bottom: 10px;
+div.form_reg_edit div.list {
+    display: table;
+    border-width: 0 0 1px 0;
+    border-style: dotted;
+    border-color: #d4d4d4;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 
-div.form_reg_edit div.list div.name
-{
-	width: 140px;
-	float: left;
-	font-family: Tahoma;
-	font-size: 11px;
-	color: #000000;
-	text-align: right;
-	font-weight: bolder;
-	margin-right: 10px;
-	margin-top: 4px;
+div.form_reg_edit div.list div.name {
+    width: 140px;
+    float: left;
+    font-family: Tahoma;
+    font-size: 11px;
+    color: #000000;
+    text-align: right;
+    font-weight: bolder;
+    margin-right: 10px;
+    margin-top: 4px;
 }
 
-div.form_reg_edit div.last
-{
-	margin-left: 150px;
+div.form_reg_edit div.last {
+    margin-left: 150px;
 }
 
-div.form_reg_edit input[type="submit"], div.form_reg_edit input[type="button"]
-{
-	height: 27px;
-	padding: 0 10px;
-	font-family: Arial Narrow;
-	font-size: 13px;
-	color: #636262;
-	text-transform: uppercase;
-	border: 0px;
-	cursor: pointer;
-	background: url(../web/images/btn_save.jpg);
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+div.form_reg_edit input[type="submit"], div.form_reg_edit input[type="button"] {
+    height: 27px;
+    padding: 0 10px;
+    font-family: Arial Narrow;
+    font-size: 13px;
+    color: #636262;
+    text-transform: uppercase;
+    border: 0px;
+    cursor: pointer;
+    background: url(../web/images/btn_save.jpg);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
-div.form_reg_edit div.accession input[type="button"]
-{
-	height: 27px;
-	padding: 0 10px;
-	font-family: Arial Narrow;
-	font-size: 13px;
-	color: #636262;
-	text-transform: uppercase;
-	border: 0px;
-	cursor: pointer;
-	background: url(../web/images/btn_save.jpg);
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+div.form_reg_edit div.accession input[type="button"] {
+    height: 27px;
+    padding: 0 10px;
+    font-family: Arial Narrow;
+    font-size: 13px;
+    color: #636262;
+    text-transform: uppercase;
+    border: 0px;
+    cursor: pointer;
+    background: url(../web/images/btn_save.jpg);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
-div.form_reg_edit div.list div.form
-{
-	float: left;
-	width: 175px;
-	margin-right: 10px;
-	font-family: Tahoma;
-	font-size: 11px;
-	color: #000000;
+div.form_reg_edit div.list div.form {
+    float: left;
+    width: 175px;
+    margin-right: 10px;
+    font-family: Tahoma;
+    font-size: 11px;
+    color: #000000;
 }
 
-div.form_reg_edit div.list div.form.provider
-{
-	width: 200px;
+div.form_reg_edit div.list div.form.provider {
+    width: 200px;
 }
 
 div.form_reg_edit div.list div.form input[type="password"], div.form_reg_edit div.list div.form select,
-div.form_reg_edit div.list div.form input[type="text"]
-{
-	border: 1px solid #d4d4d4;
-	font-family: Tahoma;
-	font-size: 11px;
-	color: #8f8f8f;
-	width: 165px;
+div.form_reg_edit div.list div.form input[type="text"] {
+    border: 1px solid #d4d4d4;
+    font-family: Tahoma;
+    font-size: 11px;
+    color: #8f8f8f;
+    width: 165px;
 }
 
-div.form_reg_edit div.list div.form input.name-provider
-{
-	width: 70px;
+div.form_reg_edit div.list div.form input.name-provider {
+    width: 70px;
 }
 
-div.form_reg_edit div.list div.form input.e-mail
-{
-	width: 95px;
+div.form_reg_edit div.list div.form input.e-mail {
+    width: 95px;
 }
 
-div.form_reg_edit div.list div.accession
-{
-	float: left;
-	width: 90px;
+div.form_reg_edit div.list div.accession {
+    float: left;
+    width: 90px;
     font-size: 10px;
 }
 
-#gallery .summary
-{
+#gallery .summary {
     text-align: left;
 }
 
-#gallery .items img
-{
+#gallery .items img {
     width: 100%;
     padding-top: 20px;
 }
 
-#gallery .pager
-{
+#gallery .pager {
     float: left;
     margin: 30px 0 10px;
 }
 
-#add-image-form
-{
+#add-image-form {
     float: left;
     margin-top: 15px;
 }
 
-.captcha-refresh-link
-{
+.captcha-refresh-link {
     display: block;
     padding-bottom: 10px;
 }

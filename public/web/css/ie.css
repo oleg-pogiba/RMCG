@@ -38,7 +38,7 @@ sub {
     vertical-align: text-bottom;
 }
 
-html>body p code {
+html > body p code {
     *white-space: normal;
 }
 
