@@ -15,6 +15,9 @@ class YFrontAccessControl extends CAccessControlFilter
 {
 	public function preFilter($filterChain)
 	{
+		//{ author="Pogiba" date="2014-01-19" desc="RBAC"
+		//todo: заменить на RBAC
+		//}
 		if (Yii::app()->user->isAuthenticated()) {
 			return true;
 		}

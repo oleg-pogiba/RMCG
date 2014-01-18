@@ -45,6 +45,11 @@ class User extends yupe\models\YModel
 
 	public $pageSize;
 
+	//{ author="Pogiba" date="2014-01-18" desc="RBAC"
+	public $rule;
+	//}
+
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -90,6 +95,7 @@ class User extends yupe\models\YModel
 			array('status', 'in', 'range' => array_keys($this->getStatusList())),
 			array('registration_date', 'length', 'max' => 50),
 			array('id, change_date, middle_name, first_name, last_name, nick_name, email, gender, avatar, status, access_level, last_visit', 'safe', 'on' => 'search'),
+			array('role', 'length', 'max' => 100),
 		);
 	}
 
@@ -139,6 +145,7 @@ class User extends yupe\models\YModel
 			'site' => Yii::t('UserModule.user', 'Site/blog'),
 			'location' => Yii::t('UserModule.user', 'Location'),
 			'about' => Yii::t('UserModule.user', 'About yourself'),
+			'role' => Yii::t('UserModule.user', 'Role'),
 		);
 	}
 

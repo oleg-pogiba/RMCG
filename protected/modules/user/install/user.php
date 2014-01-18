@@ -30,9 +30,14 @@ return array(
 				'class' => 'application.modules.user.components.TokenStorage',
 			)
 		),
+		//{ author="Pogiba" date="2014-01-19" desc="RBAC"
+//		'authenticationManager' => array(
+//			'class' => 'application.modules.user.components.AuthenticationManager'
+//		),
 		'authenticationManager' => array(
-			'class' => 'application.modules.user.components.AuthenticationManager'
+			'class' => 'application.modules.user.components.PhpAuthManager'
 		),
+		//}
 		'notify' => array(
 			'class' => 'yupe\components\Notify',
 			'mail' => array(

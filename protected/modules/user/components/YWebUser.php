@@ -14,6 +14,9 @@
 class YWebUser extends CWebUser
 {
 	private $_profile;
+	//{ author="Pogiba" date="2014-01-18" desc="RBAC"
+	private $_model = null;
+	//}
 
 	/**
 	 * Инициализация компонента:
@@ -131,4 +134,24 @@ class YWebUser extends CWebUser
 
 		return parent::afterLogin($fromCookie);
 	}
+
+//{ author="Pogiba" date="2014-01-18" desc="RBAC"
+	function getRole()
+	{
+		if ($user = $this->getModel()) {
+			// в таблице User есть поле role
+			return $user->role;
+		}
+	}
+
+	private function getModel()
+	{
+		if (!$this->isGuest && $this->_model === null) {
+			$this->_model = User::model()->findByPk($this->id, array('select' => 'role'));
+			//CVarDumper::dump($this->_model->getAttributes(), 1, true);
+		}
+		return $this->_model;
+	}
+//}
+
 }

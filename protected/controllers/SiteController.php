@@ -28,8 +28,32 @@ class SiteController extends yupe\components\controllers\FrontController
 	 */
 	public function actionIndex()
 	{
+		if(Yii::app()->user->checkAccess('administrator')){
+			echo "hello, I'm administrator";
+		}
+
 		$this->render('welcome');
 	}
+
+	//{ author="Pogiba" date="2014-01-18" desc="RBAC"
+	public function filters()
+	{
+		return array(
+			'accessControl',
+		);
+	}
+
+	public function accessRules()
+	{
+		return array(
+			array('deny',
+				'actions'=>array('view', 'index'),
+				'roles'=>array('user'),
+			),
+		);
+	}
+	//}
+
 
 	/**
 	 * Отображение для ошибок:

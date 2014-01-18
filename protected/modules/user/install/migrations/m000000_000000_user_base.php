@@ -48,6 +48,9 @@ class m000000_000000_user_base extends yupe\components\DbMigration
 				'use_gravatar' => "boolean NOT NULL DEFAULT '1'",
 				'activate_key' => 'char(32) NOT NULL',
 				'email_confirm' => "boolean NOT NULL DEFAULT '0'",
+				//{ author="Pogiba" date="2014-01-18" desc="RBAC"
+				'role' => "varchar(250) NOT NULL DEFAULT ''",
+				//}
 			),
 			$this->getOptions()
 		);
