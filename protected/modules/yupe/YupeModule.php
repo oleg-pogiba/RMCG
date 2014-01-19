@@ -1021,22 +1021,34 @@ class YupeModule extends WebModule
 		$cp = Yii::app()->urlManager->getCleanUrl(Yii::app()->getRequest()->url);
 
 		foreach ($langs as $lang) {
+			//{ author="Pogiba" date="2014-01-19" desc="Rename table"
+			if ($lang == 'uk')
+				$flag = 'ua';
+			else
+				$flag = $lang;
+			//}
 			$lang = trim($lang);
 			if ($lang == $currentLanguage) {
 				continue;
 			} else {
 				$items[] = array(
-					'icon' => 'iconflags iconflags-' . $lang,
+					'icon' => 'iconflags iconflags-' . $flag,
 					'label' => Yii::t('YupeModule.yupe', $lang),
 					'url' => $homeUrl . Yii::app()->urlManager->replaceLangUrl($cp, $lang),
 				);
 			}
 		}
 
+		//{ author="Pogiba" date="2014-01-19" desc="Rename table"
+		if ($currentLanguage == 'uk')
+			$flag = 'ua';
+		else
+			$flag = $currentLanguage;
+		//}
 
 		return array(
 			array(
-				'icon' => 'iconflags iconflags-' . $currentLanguage,
+				'icon' => 'iconflags iconflags-' . $flag,
 				'label' => Yii::t('YupeModule.yupe', $currentLanguage),
 				'items' => $items,
 				'submenuOptions' => array('style' => 'min-width: 20px;'),

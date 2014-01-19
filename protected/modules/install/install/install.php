@@ -14,6 +14,9 @@ return array(
 	'install' => true,
 	'rules' => array(
 		// правила контроллера site
-		'/' => 'site/index'
+		//{ author="Pogiba" date="2014-01-19" desc="Home page"
+		//'/' => 'site/index'
+		'/' => 'homepage/hp/index'
+		//}
 	),
 );
