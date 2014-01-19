@@ -36,12 +36,12 @@ class SiteController extends yupe\components\controllers\FrontController
 	}
 
 	//{ author="Pogiba" date="2014-01-18" desc="RBAC"
-	public function filters()
-	{
-		return array(
-			'accessControl',
-		);
-	}
+//	public function filters()
+//	{
+//		return array(
+//			'accessControl',
+//		);
+//	}
 
 	public function accessRules()
 	{

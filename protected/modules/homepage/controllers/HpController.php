@@ -27,8 +27,29 @@ class HpController extends yupe\components\controllers\FrontController
 		if ($module->mode == HomepageModule::MODE_PAGE) {
 			$view = 'page';
 
+			//{ author="Pogiba" date="2014-01-19" desc="homepage"
+			$slug = Page::model()->findByPk($module->target)->getAttribute('slug');
+
+			$page = Page::model()->find('slug = :slug AND (lang=:lang OR (lang IS NULL))', array(
+				':slug' => $slug,
+				':lang' => Yii::app()->language,
+			));
+			if (!$page) {
+				$page = Page::model()->find('slug = :slug AND (lang=:lang OR (lang IS NULL))', array(
+					':slug' => $slug,
+					':lang' => Yii::app()->getModule('yupe')->defaultLanguage,
+				));
+			}
+			//}
+			if (!$page) {
+				throw new CHttpException('404', Yii::t('PageModule.page', 'Page was not found'));
+			}
+
 			$data = array(
-				'page' => Page::model()->findByPk($module->target)
+				//{ author="Pogiba" date="2014-01-19" desc="homepage"
+				//'page' => Page::model()->findByPk($module->target)
+				'page' => $page,
+				//}
 			);
 		}
 

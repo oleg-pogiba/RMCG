@@ -44,7 +44,15 @@ class HomepageModule extends yupe\components\WebModule
 		}
 
 		if ($this->mode == self::MODE_PAGE) {
-			return CHtml::listData(Page::model()->public()->published()->findAll(), 'id', 'title');
+			//{ author="Pogiba" date="2014-01-19" desc=""
+			//return CHtml::listData(Page::model()->public()->published()->findAll(), 'id', 'title');
+			return CHtml::listData(Page::model()->public()->published()->findAll(
+				array(
+					'condition'=>"lang='".Yii::app()->getModule('yupe')->defaultLanguage."'",
+				)
+			), 'id', 'title');
+			//}
+
 		}
 
 		return array();
