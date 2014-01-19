@@ -40,7 +40,7 @@ class News extends yupe\models\YModel
 	 */
 	public function tableName()
 	{
-		return '{{news_news}}';
+		return '{{news}}';
 	}
 
 	/**

@@ -55,7 +55,7 @@ class User extends yupe\models\YModel
 	 */
 	public function tableName()
 	{
-		return '{{user_user}}';
+		return '{{user}}';
 	}
 
 	/**

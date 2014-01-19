@@ -56,7 +56,7 @@ class Page extends yupe\models\YModel
 	 */
 	public function tableName()
 	{
-		return '{{page_page}}';
+		return '{{page}}';
 	}
 
 	/**

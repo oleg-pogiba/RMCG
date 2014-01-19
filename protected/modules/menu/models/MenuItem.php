@@ -51,7 +51,7 @@ class MenuItem extends yupe\models\YModel
 	 */
 	public function tableName()
 	{
-		return '{{menu_menu_item}}';
+		return '{{menu_item}}';
 	}
 
 	/**

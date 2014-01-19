@@ -40,7 +40,7 @@ class Menu extends yupe\models\YModel
 	 */
 	public function tableName()
 	{
-		return '{{menu_menu}}';
+		return '{{menu}}';
 	}
 
 	/**

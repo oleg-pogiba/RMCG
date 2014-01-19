@@ -55,7 +55,7 @@ class FeedBack extends yupe\models\YModel
 	 */
 	public function tableName()
 	{
-		return '{{feedback_feedback}}';
+		return '{{feedback}}';
 	}
 
 	/**

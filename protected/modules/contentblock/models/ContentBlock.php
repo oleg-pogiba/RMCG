@@ -41,7 +41,7 @@ class ContentBlock extends yupe\models\YModel
 	 */
 	public function tableName()
 	{
-		return '{{contentblock_content_block}}';
+		return '{{content_block}}';
 	}
 
 	/**

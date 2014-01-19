@@ -42,7 +42,7 @@ class Category extends yupe\models\YModel
 	 */
 	public function tableName()
 	{
-		return '{{category_category}}';
+		return '{{category}}';
 	}
 
 	/**
