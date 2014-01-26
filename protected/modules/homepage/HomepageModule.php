@@ -66,7 +66,11 @@ class HomepageModule extends yupe\components\WebModule
 
 	public function getCategory()
 	{
-		return Yii::t('HomepageModule.homepage', 'Yupe!');
+		//{ author="Pogiba" date="2014-01-26" desc="Rename table"
+		//return Yii::t('HomepageModule.homepage', 'Yupe!');
+		return Yii::t('HomepageModule.homepage', 'Content');
+		//}
+
 	}
 
 	public function getDescription()

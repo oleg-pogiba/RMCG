@@ -259,7 +259,10 @@ class UserModule extends WebModule
 
 	public function getCategory()
 	{
-		return Yii::t('UserModule.user', 'Yupe!');
+		//{ author="Pogiba" date="2014-01-26" desc="Rename table"
+		//return Yii::t('UserModule.user', 'Yupe!');
+		return Yii::t('UserModule.user', 'System');
+		//}
 	}
 
 	public function getDescription()

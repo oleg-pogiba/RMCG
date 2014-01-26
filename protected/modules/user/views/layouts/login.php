@@ -128,12 +128,6 @@
 
 <footer>
 	Copyright &copy; 2009-<?php echo date('Y'); ?>
-	<?php echo $this->yupe->poweredBy(); ?>
-	<br/>
-	<a href="http://amylabs.ru/?from=yupe-panel">
-		<?php echo Yii::t('UserModule.user', 'Development and support'); ?></a> - <a
-		href="http://amylabs.ru/?from=yupe-panel" target="_blank">amyLabs
-	</a>
 </footer>
 
 </body>

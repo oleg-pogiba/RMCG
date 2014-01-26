@@ -397,7 +397,10 @@ class YupeModule extends WebModule
 	 **/
 	public function getCategory()
 	{
-		return Yii::t('YupeModule.yupe', 'Yupe!');
+		//{ author="Pogiba" date="2014-01-26" desc="Rename table"
+		//return Yii::t('YupeModule.yupe', 'Yupe!');
+		return Yii::t('YupeModule.yupe', 'System');
+		//}
 	}
 
 	/**
@@ -407,7 +410,11 @@ class YupeModule extends WebModule
 	 **/
 	public function getName()
 	{
-		return Yii::t('YupeModule.yupe', 'Yupe!');
+		//{ author="Pogiba" date="2014-01-26" desc="Rename table"
+		//return Yii::t('YupeModule.yupe', 'Yupe!');
+		return Yii::t('YupeModule.yupe', 'System');
+		//}
+
 	}
 
 	/**

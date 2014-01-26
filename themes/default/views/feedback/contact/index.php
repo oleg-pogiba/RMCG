@@ -15,10 +15,6 @@ Yii::import('application.modules.install.InstallModule');
 
 	<p> <?php echo Yii::t('FeedbackModule.feedback', 'If you interesting with quality project which simple in support'); ?></p>
 
-	<p>
-		<b><?php echo Yii::t('FeedbackModule.feedback', 'Immediately <a href="http://yupe.ru/contacts?from=contact" target="_blank">write to us</a> about it!'); ?></b>
-	</p>
-
 	<p> <?php echo Yii::t('FeedbackModule.feedback', 'We try to answer as fast as we can!'); ?></p>
 
 	<p><b><?php echo Yii::t('FeedbackModule.feedback', 'Thanks for attention!'); ?></b></p>
@@ -109,27 +105,9 @@ Yii::import('application.modules.install.InstallModule');
 
 	<p><?php echo Yii::t('InstallModule.install', 'Interesting links:'); ?></p>
 
-	<?php echo CHtml::link(Yii::t('InstallModule.install', 'Official docs'), 'http://yupe.ru/docs/index.html?from=contact'); ?>
-	- <?php echo Yii::t('InstallModule.install', 'We working with it'); ?>
+	<?php //echo CHtml::link(Yii::t('InstallModule.install', 'Official docs'), 'http://yupe.ru/docs/index.html?from=contact'); ?>
+	- <?php// echo Yii::t('InstallModule.install', 'We working with it'); ?>
 
 	<br/><br/>
-
-	<?php echo CHtml::link(Yii::t('InstallModule.install', 'Support Yupe forum'), 'http://yupe.ru/talk/'); ?>
-	- <?php echo Yii::t('InstallModule.install', 'All discussions here'); ?>
-
-	<br/><br/>
-
-	<?php echo CHtml::link(Yii::t('InstallModule.install', 'Official Yupe twitter'), 'https://twitter.com/#!/YupeCms'); ?>
-	- <?php echo Yii::t('InstallModule.install', 'Follow us'); ?>
-
-	<br/><br/>
-
-	<?php echo CHtml::link(Yii::t('InstallModule.install', 'Sources on GitHub'), 'http://github.com/yupe/yupe/'); ?>
-	- <?php echo Yii::t('InstallModule.install', 'Send pull request'); ?>
-
-	<br/><br/>
-
-	<?php echo CHtml::link(Yii::t('InstallModule.install', 'General sponsor'), 'http://amylabs.ru?from=yupe-contact'); ?>
-	- <?php echo Yii::t('InstallModule.install', 'Just good guys'); ?>
 
 </div>
