@@ -1063,6 +1063,47 @@ class YupeModule extends WebModule
 		);
 	}
 
+	public function getLanguageSelectorArrayFrontend()
+	{
+		$langs = explode(',', $this->availableLanguages);
+
+		if (count($langs) <= 1) {
+			return array();
+		}
+
+		$items = array();
+		$currentLanguage = Yii::app()->language;
+
+		$homeUrl = Yii::app()->homeUrl . (Yii::app()->homeUrl[strlen(Yii::app()->homeUrl) - 1] != "/" ? '/' : '');
+		$cp = Yii::app()->urlManager->getCleanUrl(Yii::app()->getRequest()->url);
+
+		foreach ($langs as $lang) {
+			if ($lang == 'uk')
+				$flag = 'ua';
+			else
+				$flag = $lang;
+
+			$lang = trim($lang);
+
+			$items[] = array(
+				'label' => CHtml::image(
+						Yii::app()->getAssetManager()->publish(
+							Yii::app()->theme->basePath) . '/web/images/' . $flag . '.png',
+						Yii::t('YupeModule.yupe', $lang),
+						array('title' => Yii::t('YupeModule.yupe', $lang))
+					),
+				'url' => $homeUrl . Yii::app()->urlManager->replaceLangUrl($cp, $lang),
+			);
+
+		}
+		if ($currentLanguage == 'uk')
+			$flag = 'ua';
+		else
+			$flag = $currentLanguage;
+
+		return $items;
+	}
+
 	/**
 	 * Генерация анкора PoweredBy
 	 *
