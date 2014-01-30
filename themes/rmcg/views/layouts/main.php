@@ -70,6 +70,20 @@
 				<!-- content -->
 				<?php echo $content; ?>
 				<!-- content end-->
+				<div id="partners"><h3>Наши партнеры:</h3>
+					<?php echo CHtml::image(Yii::app()->getAssetManager()->publish(Yii::app()->theme->basePath) . '/web/images/pharma.jpg');?>
+					<?php echo CHtml::image(Yii::app()->getAssetManager()->publish(Yii::app()->theme->basePath) . '/web/images/recordati.jpg');?>
+					<?php echo CHtml::image(Yii::app()->getAssetManager()->publish(Yii::app()->theme->basePath) . '/web/images/fmc.jpg');?>
+					<?php echo CHtml::image(Yii::app()->getAssetManager()->publish(Yii::app()->theme->basePath) . '/web/images/microlabs.png');?>
+					<?php echo CHtml::image(Yii::app()->getAssetManager()->publish(Yii::app()->theme->basePath) . '/web/images/umc.gif');?>
+				</div>
+				<div id="clients"><h3>Наши клиенты:</h3>
+					<?php echo CHtml::image(Yii::app()->getAssetManager()->publish(Yii::app()->theme->basePath) . '/web/images/pharma.jpg');?>
+					<?php echo CHtml::image(Yii::app()->getAssetManager()->publish(Yii::app()->theme->basePath) . '/web/images/recordati.jpg');?>
+					<?php echo CHtml::image(Yii::app()->getAssetManager()->publish(Yii::app()->theme->basePath) . '/web/images/fmc.jpg');?>
+					<?php echo CHtml::image(Yii::app()->getAssetManager()->publish(Yii::app()->theme->basePath) . '/web/images/microlabs.png');?>
+					<?php echo CHtml::image(Yii::app()->getAssetManager()->publish(Yii::app()->theme->basePath) . '/web/images/umc.gif');?>
+				</div>
 			</div>
 		</div>
 		<div id="secondaryContent">
