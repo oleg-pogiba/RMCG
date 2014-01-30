@@ -2,26 +2,24 @@
 
 <?php
 $this->breadcrumbs = array(
-	Yii::t('CatalogModule.catalog', 'Products') => array('/catalog/catalog/index/'),
-	CHtml::encode($good->name)
+    Yii::t('CatalogModule.catalog','Products') => array('/catalog/catalog/index/'),
+    CHtml::encode($good->name)
 );
 ?>
 
 <div class="post">
-	<div class="title">
-		<?php echo $good->name; ?>
-	</div>
-	<br/>
-
-	<div class="content">
-		<p><?php echo $good->description; ?></p>
-	</div>
-	<div class="nav">
-		<?php echo Yii::t('CatalogModule.catalog', 'Price') . ': ';
-		echo $good->price; ?>
-		<br/>
-		<?php echo CHtml::link(Yii::t('CatalogModule.catalog', 'Constant link'), array('/news/news/show', 'name' => $good->alias)); ?>
-	</div>
+    <div class="title">
+        <?php echo $good->name; ?>
+    </div>
+    <br/>
+    <div class="content">
+        <p><?php echo $good->description; ?></p>
+    </div>
+    <div class="nav">
+        <?php echo Yii::t('CatalogModule.catalog','Price').': '; echo $good->price; ?>
+        <br/>
+        <?php echo CHtml::link(Yii::t('CatalogModule.catalog','Constant link'), array('/news/news/show', 'name' => $good->alias));?>
+    </div>
 </div>
 
 

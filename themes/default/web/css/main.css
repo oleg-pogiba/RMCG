@@ -9,7 +9,7 @@ span.label a {
 }
 
 /* blog */
-.blog-info > span {
+.blog-info>span {
     display: inline-block;
     padding-right: .7em;
 }

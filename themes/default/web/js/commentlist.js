@@ -1,5 +1,5 @@
-$(document).ready(function () {
-    $(document).on("click", "a.commentParrent", function () {
+$(document).ready(function() {
+    $(document).on("click", "a.commentParrent", function() {
         $this = $(this);
         $('#wcml').show();
         $("div.comment-form").remove();

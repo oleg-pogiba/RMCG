@@ -107,4 +107,5 @@ return array(
 	'are required' => 'обязательны.',
 	'management' => 'управление',
 	'read...' => 'читать...',
+	'Details...' => 'Далее...',
 );

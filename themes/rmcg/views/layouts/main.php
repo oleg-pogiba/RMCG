@@ -32,14 +32,17 @@
 	</div>
 </div>
 <div id="cabinet">
+	<?php if (Yii::app()->user->isAuthenticated()): ?>
 	<?php echo CHtml::link(
-		'Личный кабинет',
-		array(
-			'/user/account/profile/',
-		)
+		Yii::t('UserModule.user', 'Logout'),
+		array('/user/account/logout',)
 	); ?>
-
-
+	<?php else: ?>
+	<?php echo CHtml::link(
+		Yii::t('UserModule.user', 'Login'),
+		array('/user/account/login',)
+	); ?>
+	<?php endif; ?>
 </div>
 <div id="outer">
 	<div id="header">
@@ -49,7 +52,8 @@
 					Yii::app()->theme->basePath) . '/web/images/logo.png',
 				Yii::t('zii', 'Home'),
 				array('title' => Yii::t('zii', 'Home'))
-			), array(
+			),
+			array(
 				'/' . Yii::app()->defaultController . '/index',
 			)
 		); ?>
@@ -69,24 +73,12 @@
 			</div>
 		</div>
 		<div id="secondaryContent">
-			<div style="color:#AF0A0A;"><a href="#"><strong>Новости:</strong></a></div>
-			<br/>
-
-			<h3>30.12.2013</h3>
-
-			<p>Наказ МОЗ України "Про державну реєстрацію (перереєстрацію) лікарських засобів та внесення змін у
-				реєстраційні матеріали" від 27 грудня 2013р №1153<a href="#"><br/>Далее&#8230;</a></p>
-
-			<h3>27.11.2013</h3>
-
-			<p>Перелік лікарських засобів, на які передано до МОЗ висновки щодо ефективності, безпечності та якості
-				лікарських засобів, що пропонуються до державної реєстрації (перереєстрації), внесення змін до
-				реєстраційних матеріалів.<a href="#"><br/>Далее&#8230;</a></p>
-
-			<h3>28.10.2013</h3>
-
-			<p>Наказ МОЗ України "Про державну реєстрацію (перереєстрацію) лікарських засобів та внесення змін у
-				реєстраційні матеріали" від 28 жовтня 2013р №916<a href="#"><br/>Далее&#8230;</a></p>
+			<div class="widget last-posts-widget">
+				<?php $this->widget(
+					'application.modules.news.widgets.LastNewsWidget',
+					array('cacheTime' => $this->yupe->coreCacheTime)
+				); ?>
+			</div>
 		</div>
 		<div class="clear"></div>
 	</div>

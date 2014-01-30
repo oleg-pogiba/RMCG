@@ -3,53 +3,53 @@
 
 <?php
 $this->breadcrumbs = array(
-	Yii::t('FeedbackModule.feedback', 'FAQ') => array('/feedback/contact/faq/'),
-	$model->theme,
+    Yii::t('FeedbackModule.feedback', 'FAQ') => array('/feedback/contact/faq/'),
+    $model->theme,
 );
 ?>
 
 <h1>
-	<?php echo $model->theme; ?> #<?php echo $model->id; ?>
-	<?php
-	$this->widget(
-		'bootstrap.widgets.TbButton',
-		array(
-			'htmlOptions' => array(
-				'class' => 'btn btn-info'
-			),
-			'buttonType' => 'link',
-			'label' => Yii::t('FeedbackModule.feedback', 'Add question ?'),
-			'url' => Yii::app()->createUrl('/feedback/contact/index/'),
-		)
-	); ?>
+    <?php echo $model->theme; ?> #<?php echo $model->id; ?>
+    <?php
+    $this->widget(
+        'bootstrap.widgets.TbButton',
+        array(
+            'htmlOptions' => array(
+                'class' => 'btn btn-info'
+            ),
+            'buttonType' => 'link',
+            'label' => Yii::t('FeedbackModule.feedback', 'Add question ?'),
+            'url' => Yii::app()->createUrl('/feedback/contact/index/'),
+        )
+    ); ?>
 </h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView', array(
-	'data' => $model,
-	'attributes' => array(
-		'creation_date',
-		'name',
-		'theme',
-		array(
-			'name' => 'text',
-			'type' => 'raw',
-			'value' => $model->text,
-		),
+    'data' => $model,
+    'attributes' => array(
+        'creation_date',
+        'name',
+        'theme',
+        array(
+            'name' => 'text',
+            'type' => 'raw',
+            'value' => $model->text,
+        ),
 
-		array(
-			'name' => 'type',
-			'value' => $model->getType()
-		),
-		array(
-			'name' => 'answer_user',
-			'value' => $model->getAnsweredUser()->getFullName()
-		),
-		'answer_date',
-		array(
-			'name' => 'answer',
-			'type' => 'raw'
-		),
-	),
+        array(
+            'name' => 'type',
+            'value' => $model->getType()
+        ),
+        array(
+            'name' => 'answer_user',
+            'value' => $model->getAnsweredUser()->getFullName()
+        ),
+        'answer_date',
+        array(
+            'name' => 'answer',
+            'type' => 'raw'
+        ),
+    ),
 )); ?>
 
 <br/><br/>

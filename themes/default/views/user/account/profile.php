@@ -38,144 +38,144 @@ Yii::app()->clientScript->registerScript('regs', "
             });");
 
 $form = $this->beginWidget(
-	'bootstrap.widgets.TbActiveForm',
-	array(
-		'id' => 'profile-form',
-		'enableAjaxValidation' => false,
-		'enableClientValidation' => true,
-		'type' => 'vertical',
-		'inlineErrors' => true,
-		'htmlOptions' => array(
-			'class' => 'well',
-			'enctype' => 'multipart/form-data',
-		)
-	));
+    'bootstrap.widgets.TbActiveForm', 
+    array(
+        'id'                     => 'profile-form',
+        'enableAjaxValidation'   => false,
+        'enableClientValidation' => true,
+        'type' => 'vertical',
+        'inlineErrors' => true,
+        'htmlOptions' => array(
+            'class' => 'well',
+            'enctype' => 'multipart/form-data',
+        )
+    ));
 ?>
 
-<?php echo $form->errorSummary($model); ?>
+    <?php echo  $form->errorSummary($model); ?>
 
-	<div class="row-fluid">
-		<div class="span3">
-			<?php $this->widget('AvatarWidget', array('user' => $user, 'noCache' => true)); ?>
-		</div>
-		<div class="span4">
-			<?php echo $form->checkBoxRow($model, 'use_gravatar', array(
-				'hint' => Yii::t('UserModule.user', 'If you do not use Gravatar feel free to upload your own.')
-			)); ?>
+    <div class="row-fluid">
+        <div class="span3">
+            <?php $this->widget('AvatarWidget', array('user' => $user, 'noCache' => true)); ?>
+        </div>
+        <div class="span4">
+            <?php echo $form->checkBoxRow($model, 'use_gravatar', array(
+                'hint'=> Yii::t('UserModule.user','If you do not use Gravatar feel free to upload your own.')
+            )); ?>
+            
+            <?php echo $form->fileFieldRow($model, 'avatar'); ?>
+        </div>
+    </div>
 
-			<?php echo $form->fileFieldRow($model, 'avatar'); ?>
-		</div>
-	</div>
+    <div class="row-fluid">
+        <?php echo $form->textFieldRow($model, 'email', array(
+            'autocomplete' => 'off',
+            'class'=>'span6' . ( (Yii::app()->user->profile->getIsVerifyEmail() && !$model->hasErrors()) ? ' confirmed' : '' )
+        )); ?>
 
-	<div class="row-fluid">
-		<?php echo $form->textFieldRow($model, 'email', array(
-			'autocomplete' => 'off',
-			'class' => 'span6' . ((Yii::app()->user->profile->getIsVerifyEmail() && !$model->hasErrors()) ? ' confirmed' : '')
-		)); ?>
-
-		<?php if (Yii::app()->user->profile->getIsVerifyEmail() && !$model->hasErrors()): ?>
-			<p class="email-status-confirmed text-success">
-				<?php echo Yii::t('UserModule.user', 'E-mail was verified'); ?>
-			</p>
-		<?php elseif (!$model->hasErrors()): ?>
-			<p class="email-status-not-confirmed text-error">
-				<?php echo Yii::t('UserModule.user', 'e-mail was not confirmed, please check you mail!'); ?>
-			</p>
-		<?php endif ?>
-
-	</div>
+        <?php if (Yii::app()->user->profile->getIsVerifyEmail() && !$model->hasErrors()):?>
+            <p class="email-status-confirmed text-success">
+                <?php echo Yii::t('UserModule.user','E-mail was verified');?>
+            </p>
+        <?php elseif( !$model->hasErrors() ):?>
+            <p class="email-status-not-confirmed text-error">
+                <?php echo Yii::t('UserModule.user','e-mail was not confirmed, please check you mail!');?>
+            </p>
+        <?php endif?>
+       
+    </div>
 
 
-	<div class="row-fluid">
-		<?php echo $form->textFieldRow($model, 'last_name', array('class' => 'span6')) ?>
-	</div>
+    <div class="row-fluid">
+        <?php echo $form->textFieldRow($model, 'last_name', array('class' => 'span6')) ?>
+    </div>
 
-	<div class="row-fluid">
-		<?php echo $form->textFieldRow($model, 'first_name', array('class' => 'span6')) ?>
-	</div>
+    <div class="row-fluid">
+        <?php echo $form->textFieldRow($model, 'first_name', array('class' => 'span6')) ?>
+    </div>
 
-	<div class="row-fluid">
-		<?php echo $form->textFieldRow($model, 'middle_name', array('class' => 'span6')) ?>
-	</div>
+    <div class="row-fluid">
+        <?php echo $form->textFieldRow($model, 'middle_name', array('class' => 'span6')) ?>
+    </div>
 
-	<div class="row-fluid">
-		<?php echo $form->dropDownListRow($model, 'gender', User::model()->getGendersList(), array('class' => 'span6', 'data-original-title' => $model->getAttributeLabel('gender'), 'data-content' => User::model()->getAttributeDescription('gender'))); ?>
-	</div>
+    <div class="row-fluid">
+        <?php echo $form->dropDownListRow($model, 'gender', User::model()->getGendersList(),array('class' => 'span6','data-original-title' => $model->getAttributeLabel('gender'), 'data-content' => User::model()->getAttributeDescription('gender'))); ?>
+    </div>
 
-	<div class="row-fluid">
-		<?php echo $form->label($model, 'birth_date'); ?>
-		<?php
-		$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-			'model' => $model,
-			'attribute' => 'birth_date',
-			// additional javascript options for the date picker plugin
-			'options' => array(
-				'showAnim' => 'fold',
-				'dateFormat' => 'yy-mm-dd'
-			),
-			'htmlOptions' => array(
-				'style' => 'height:20px;'
-			),
-		));
-		?>
-	</div>
+    <div class="row-fluid">
+        <?php echo $form->label($model,'birth_date');?>
+        <?php
+        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                'model' => $model,
+                'attribute' => 'birth_date',
+                // additional javascript options for the date picker plugin
+                'options'=>array(
+                    'showAnim'=>'fold',
+                    'dateFormat' => 'yy-mm-dd'
+                ),
+                'htmlOptions'=>array(
+                    'style'=>'height:20px;'
+                ),
+            ));
+        ?>
+    </div>
 
-	<div class="row-fluid">
-		<?php echo $form->textFieldRow($model, 'location', array('class' => 'span6')) ?>
-	</div>
+    <div class="row-fluid">
+        <?php echo $form->textFieldRow($model, 'location', array('class' => 'span6')) ?>
+    </div>
 
-	<div class="row-fluid">
-		<?php echo $form->textFieldRow($model, 'site', array('class' => 'span6')) ?>
-	</div>
+    <div class="row-fluid">
+        <?php echo $form->textFieldRow($model, 'site', array('class' => 'span6')) ?>
+    </div>
 
-	<div class="row-fluid">
-		<?php echo $form->textAreaRow($model, 'about', array('class' => 'span6', 'rows' => 7)); ?>
-	</div>
+    <div class="row-fluid">
+        <?php echo $form->textAreaRow($model, 'about', array('class' => 'span6','rows' => 7));?>
+    </div>
 
-	<hr>
+    <hr>
+    
+    <div class="row-fluid">
+        <p class="password-change-msg muted span6">
+            <?php echo Yii::t('UserModule.user','If you do not want to change password, leave fields empty.');?>
+        </p>
+    </div>
+    
+    <div class="row-fluid">
+        <?php echo $form->passwordFieldRow($model, 'password', array('class'=>'span6','autocomplete' => 'off'));?>
+    </div>
+        
+    <div class="row-fluid">
+        <?php echo $form->passwordFieldRow($model, 'cPassword', array('class'=>'span6','autocomplete' => 'off'));?>
+        <label class="checkbox">
+            <input type="checkbox" value="1" id="show_pass"> <?php echo Yii::t('UserModule.user','show password') ?>
+        </label>
+    </div>
+        
+    <?php if (is_array($this->module->profiles)&&count($this->module->profiles)):?>
+        <?php foreach($this->module->profiles as $k=>$p):?>
+            <?php $this->renderPartial("//".$k."/".$k."_profile", array("model"=>$p, "form"=>$form));?>
+        <?php endforeach;?>
+    <?php endif;?>
 
-	<div class="row-fluid">
-		<p class="password-change-msg muted span6">
-			<?php echo Yii::t('UserModule.user', 'If you do not want to change password, leave fields empty.'); ?>
-		</p>
-	</div>
+    <div class="row-fluid  control-group">
+        
+         <div class="row-fluid email-change-msg">
+            <?php if (Yii::app()->user->profile->getIsVerifyEmail()) : ?>
+                <p class="text-warning span6">
+                    <?php echo Yii::t('UserModule.user','Warning! After changing your e-mail you will receive a message explaining how to verify it');?>
+                </p>
+            <?php endif;?>
+        </div>  
+        
+    <?php $this->widget(
+        'bootstrap.widgets.TbButton',
+        array(
+            'buttonType' => 'submit',
+            'type' => 'primary',
+            'label' => Yii::t('UserModule.user','Save profile'),
+        )
+    ); ?>
 
-	<div class="row-fluid">
-		<?php echo $form->passwordFieldRow($model, 'password', array('class' => 'span6', 'autocomplete' => 'off')); ?>
-	</div>
-
-	<div class="row-fluid">
-		<?php echo $form->passwordFieldRow($model, 'cPassword', array('class' => 'span6', 'autocomplete' => 'off')); ?>
-		<label class="checkbox">
-			<input type="checkbox" value="1" id="show_pass"> <?php echo Yii::t('UserModule.user', 'show password') ?>
-		</label>
-	</div>
-
-<?php if (is_array($this->module->profiles) && count($this->module->profiles)): ?>
-	<?php foreach ($this->module->profiles as $k => $p): ?>
-		<?php $this->renderPartial("//" . $k . "/" . $k . "_profile", array("model" => $p, "form" => $form)); ?>
-	<?php endforeach; ?>
-<?php endif; ?>
-
-	<div class="row-fluid  control-group">
-
-		<div class="row-fluid email-change-msg">
-			<?php if (Yii::app()->user->profile->getIsVerifyEmail()) : ?>
-				<p class="text-warning span6">
-					<?php echo Yii::t('UserModule.user', 'Warning! After changing your e-mail you will receive a message explaining how to verify it'); ?>
-				</p>
-			<?php endif; ?>
-		</div>
-
-		<?php $this->widget(
-			'bootstrap.widgets.TbButton',
-			array(
-				'buttonType' => 'submit',
-				'type' => 'primary',
-				'label' => Yii::t('UserModule.user', 'Save profile'),
-			)
-		); ?>
-
-	</div>
-
-<?php $this->endWidget(); ?>
+    </div>
+        
+    <?php $this->endWidget(); ?>

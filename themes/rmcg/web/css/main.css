@@ -140,6 +140,10 @@ a:active {
     line-height: 1.6em;
 }
 
+#content .last-posts-widget p {
+    margin-bottom: 0.5em;
+}
+
 #content h2 {
     font-size: 1.5em;
 }
