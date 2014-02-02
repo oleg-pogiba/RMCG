@@ -194,7 +194,7 @@ class PageBackendController extends yupe\components\controllers\BackController
 				);
 
 				$this->redirect(
-					Yii::app()->getRequest()->getPost(
+					(array)Yii::app()->getRequest()->getPost(
 						'submit-type', array('update', 'id' => $model->id)
 					)
 				);
