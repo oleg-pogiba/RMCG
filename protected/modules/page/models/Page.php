@@ -153,7 +153,7 @@ class Page extends yupe\models\YModel
 			'user_id' => Yii::t('PageModule.page', 'Page creator'),
 			'change_user_id' => Yii::t('PageModule.page', 'Page editor'),
 			'order' => Yii::t('PageModule.page', 'Page priority in widgets and menu.'),
-			//{ author="Pogiba" date="2014-05-139" desc="Rename table"
+			//{ author="Pogiba" date="2014-05-139" desc=""
 			'vw' => Yii::t('PageModule.page', 'View for page'),
 			//}
 		);
@@ -227,7 +227,7 @@ class Page extends yupe\models\YModel
 		$criteria->compare('t.status', $this->status);
 		$criteria->compare('category_id', $this->category_id);
 		$criteria->compare('is_protected', $this->is_protected);
-		//{ author="Pogiba" date="2014-05-139" desc="Rename table"
+		//{ author="Pogiba" date="2014-05-139" desc=""
 		$criteria->compare('vw', $this->vw);
 		//}
 
@@ -246,7 +246,7 @@ class Page extends yupe\models\YModel
 		);
 	}
 
-	//{ author="Pogiba" date="2014-05-140" desc="Rename table"
+	//{ author="Pogiba" date="2014-05-140" desc=""
 	public function getVwList()
 	{
 		return array(
