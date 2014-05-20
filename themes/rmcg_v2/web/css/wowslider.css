@@ -1,0 +1,7 @@
+﻿#wowslider-container {
+	zoom: 1;
+  position: inherit;
+  z-index:90;
+	border:none;
+  overflow: hidden;
+}

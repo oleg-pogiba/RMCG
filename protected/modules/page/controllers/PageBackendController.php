@@ -133,6 +133,9 @@ class PageBackendController extends yupe\components\controllers\BackController
 			$model->title_short = $page->title_short;
 			$model->parent_id = $page->parent_id;
 			$model->order = $page->order;
+			//{ author="Pogiba" date="2014-05-19" desc="Rename table"
+			$model->vw = $page->vw;
+			//}
 		} else {
 			$model->lang = Yii::app()->language;
 		}

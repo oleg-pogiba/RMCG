@@ -38,6 +38,7 @@ class m000000_000000_page_base extends yupe\components\DbMigration
 				'status' => 'integer NOT NULL',
 				'is_protected' => "boolean NOT NULL DEFAULT '0'",
 				'menu_order' => "integer NOT NULL DEFAULT '0'",
+				'vw' => 'varchar(150) NOT NULL',
 			),
 			$this->getOptions()
 		);

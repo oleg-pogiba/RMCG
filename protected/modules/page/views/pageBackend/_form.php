@@ -95,9 +95,15 @@ $form = $this->beginWidget(
 	</div>
 </div>
 <div
+	class="wide row-fluid control-group <?php echo ($model->hasErrors('vw')) ? 'error' : ''; ?>">
+	<div class="span4">
+		<?php echo $form->dropDownListRow($model, 'vw', $model->getVwList(), array('class' => 'span7 popover-help', 'data-original-title' => $model->getAttributeLabel('vw'), 'data-content' => $model->getAttributeDescription('vw'))); ?>
+	</div>
+</div>
+<div
 	class="wide row-fluid control-group <?php echo ($model->hasErrors('status') || $model->hasErrors('order')) ? 'error' : ''; ?>">
 	<div class="span4">
-		<?php echo $form->dropDownListRow($model, 'status', $model->statusList, array('class' => 'span7 popover-help', 'data-original-title' => $model->getAttributeLabel('status'), 'data-content' => $model->getAttributeDescription('status'))); ?>
+		<?php echo $form->dropDownListRow($model, 'status', $model->getStatusList(), array('class' => 'span7 popover-help', 'data-original-title' => $model->getAttributeLabel('status'), 'data-content' => $model->getAttributeDescription('status'))); ?>
 	</div>
 	<div class="span3">
 		<?php echo $form->textFieldRow($model, 'order', array('size' => 10, 'maxlength' => 10, 'class' => 'span7 popover-help', 'data-original-title' => $model->getAttributeLabel('order'), 'data-content' => $model->getAttributeDescription('order'))); ?>

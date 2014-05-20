@@ -29,6 +29,7 @@
  * @property integer $user_id
  * @property integer $change_user_id
  * @property integer $order
+ * @property string $vw
  */
 class Page extends yupe\models\YModel
 {
@@ -36,6 +37,11 @@ class Page extends yupe\models\YModel
 	const STATUS_DRAFT = 0;
 	const STATUS_PUBLISHED = 1;
 	const STATUS_MODERATION = 2;
+
+	//{ author="Pogiba" date="2014-05-20" desc=""
+	const VW_DEFAULT = 0;
+	const VW_SIDEBAR = 1;
+	//}
 
 	// В PostgreSQL используется явное указание типов:
 	const PROTECTED_NO = false;
@@ -65,7 +71,7 @@ class Page extends yupe\models\YModel
 	public function rules()
 	{
 		return array(
-			array('title, slug, body, lang', 'required', 'on' => array('update', 'insert')),
+			array('title, slug, body, lang, vw', 'required', 'on' => array('update', 'insert')),
 			array('status, is_protected, parent_id, order, category_id', 'numerical', 'integerOnly' => true, 'on' => array('update', 'insert')),
 			array('parent_id', 'length', 'max' => 45),
 			array('lang', 'length', 'max' => 2),
@@ -79,7 +85,7 @@ class Page extends yupe\models\YModel
 			array('title, title_short, slug, description, keywords', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
 			array('slug', 'yupe\components\validators\YSLugValidator'),
 			array('lang', 'match', 'pattern' => '/^[a-z]{2}$/', 'message' => Yii::t('PageModule.page', 'Bad characters in {attribute} field')),
-			array('lang, id, parent_id, creation_date, change_date, title, title_short, slug, body, keywords, description, status, order, lang', 'safe', 'on' => 'search'),
+			array('lang, id, parent_id, creation_date, change_date, title, title_short, slug, body, keywords, description, status, order, lang, vw', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -120,6 +126,7 @@ class Page extends yupe\models\YModel
 			'user_id' => Yii::t('PageModule.page', 'Created by'),
 			'change_user_id' => Yii::t('PageModule.page', 'Changed by'),
 			'order' => Yii::t('PageModule.page', 'Sorting'),
+			'vw' => Yii::t('PageModule.page', 'View'),
 		);
 	}
 
@@ -146,6 +153,9 @@ class Page extends yupe\models\YModel
 			'user_id' => Yii::t('PageModule.page', 'Page creator'),
 			'change_user_id' => Yii::t('PageModule.page', 'Page editor'),
 			'order' => Yii::t('PageModule.page', 'Page priority in widgets and menu.'),
+			//{ author="Pogiba" date="2014-05-139" desc="Rename table"
+			'vw' => Yii::t('PageModule.page', 'View for page'),
+			//}
 		);
 	}
 
@@ -217,6 +227,9 @@ class Page extends yupe\models\YModel
 		$criteria->compare('t.status', $this->status);
 		$criteria->compare('category_id', $this->category_id);
 		$criteria->compare('is_protected', $this->is_protected);
+		//{ author="Pogiba" date="2014-05-139" desc="Rename table"
+		$criteria->compare('vw', $this->vw);
+		//}
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
@@ -232,6 +245,16 @@ class Page extends yupe\models\YModel
 			self::STATUS_MODERATION => Yii::t('PageModule.page', 'On moderation'),
 		);
 	}
+
+	//{ author="Pogiba" date="2014-05-140" desc="Rename table"
+	public function getVwList()
+	{
+		return array(
+			self::VW_DEFAULT => Yii::t('PageModule.page', 'Default'),
+			self::VW_SIDEBAR => Yii::t('PageModule.page', 'With Sidebar'),
+		);
+	}
+	//}
 
 	public function getStatus()
 	{

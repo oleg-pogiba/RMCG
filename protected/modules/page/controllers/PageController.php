@@ -8,6 +8,7 @@
  * @since 0.1
  *
  */
+Yii::import('application.modules.menu.models.*');
 class PageController extends yupe\components\controllers\FrontController
 {
 	/**
@@ -21,6 +22,7 @@ class PageController extends yupe\components\controllers\FrontController
 	public function actionShow($slug)
 	{
 		$this->layout = '//layouts/page-default';
+
 		$page = null;
 		// превью
 		$page = ((int)Yii::app()->getRequest()->getQuery('preview') === 1 && Yii::app()->user->isSuperUser())
@@ -48,7 +50,17 @@ class PageController extends yupe\components\controllers\FrontController
 		}
 		$this->currentPage = $page;
 
-		$this->render('page', array('page' => $page));
+		//{ author="Pogiba" date="2014-05-20" desc=""
+		switch ($page->vw){
+			case Page::VW_SIDEBAR:
+				$view = 'page-sidebar';
+				break;
+			default:
+				$view = 'page';
+		}
+
+		$this->render($view, array('page' => $page));
+		//}
 	}
 
 	/**

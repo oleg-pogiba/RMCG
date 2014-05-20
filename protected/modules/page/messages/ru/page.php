@@ -116,4 +116,9 @@ return array(
 	'no' => 'нет',
 	'are required.' => 'обязательны.',
 	'manage' => 'управление',
+	'REGISTRATION' => 'РЕГИСТРАЦИЯ',
+	'SERTIFICATION' => 'CЕРТИФИКАЦИЯ',
+	'AUTHORIZATION' => 'АВТОРИЗАЦИЯ',
+	'MARKETING' => 'МАРКЕТИНГ',
+	'PHARMACOVIGILANCE' => 'ФАРМАКОНАДЗОР',
 );

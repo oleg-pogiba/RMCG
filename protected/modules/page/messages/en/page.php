@@ -116,4 +116,9 @@ return array(
 	'no' => '',
 	'are required.' => '',
 	'manage' => '',
+	'REGISTRATION' => 'REGISTRATION',
+	'SERTIFICATION' => 'SERTIFICATION',
+	'AUTHORIZATION' => 'AUTHORIZATION',
+	'MARKETING' => 'MARKETING',
+	'PHARMACOVIGILANCE' => 'PHARMACOVIGILANCE',
 );
