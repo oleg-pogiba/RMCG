@@ -108,7 +108,7 @@ $this->keywords = !empty($page->keywords) ? $page->keywords : $this->keywords
 				);
 				?>
 			</p>
-		</div>c
+		</div>
 	</div>
 </div>
 
