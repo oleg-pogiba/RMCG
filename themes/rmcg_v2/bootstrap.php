@@ -18,7 +18,8 @@ $assetPath = $assetManager->publish(
 $styles = array(
     'main.css',
     'flags.css',
-    'wowslider.css'
+    'wowslider.css',
+	'bootstrap.css',
 );
 foreach ($styles as $style) {
     $clientScript->registerCssFile($assetPath . '/css/' . $style);

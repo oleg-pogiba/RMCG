@@ -11,13 +11,15 @@ Yii::import('application.modules.install.InstallModule');
 
 <div class="alert alert-notice">
 
-	<p> <?php echo Yii::t('FeedbackModule.feedback', 'If you have any questions, proposals or want to report an error'); ?></p>
-
-	<p> <?php echo Yii::t('FeedbackModule.feedback', 'If you interesting with quality project which simple in support'); ?></p>
-
-	<p> <?php echo Yii::t('FeedbackModule.feedback', 'We try to answer as fast as we can!'); ?></p>
-
-	<p><b><?php echo Yii::t('FeedbackModule.feedback', 'Thanks for attention!'); ?></b></p>
+	<p>
+		<?php $this->widget(
+			"application.modules.contentblock.widgets.ContentBlockWidget",
+			array(
+				"code" => "contact",
+				"silent" => true
+			)
+		); ?>
+	</p>
 
 </div>
 
@@ -41,24 +43,24 @@ Yii::import('application.modules.install.InstallModule');
 
 	<?php if ($model->type): ?>
 		<div class='row-fluid control-group <?php echo $model->hasErrors('type') ? 'error' : ''; ?>'>
-			<?php echo $form->dropDownListRow($model, 'type', $module->types, array('class' => 'span6', 'required' => true)); ?>
+			<?php echo $form->dropDownListRow($model, 'type', $module->types, array('class' => 'span8', 'required' => true)); ?>
 		</div>
 	<?php endif; ?>
 
 	<div class='row-fluid control-group <?php echo $model->hasErrors('name') ? 'error' : ''; ?>'>
-		<?php echo $form->textFieldRow($model, 'name', array('class' => 'span6', 'required' => true)); ?>
+		<?php echo $form->textFieldRow($model, 'name', array('class' => 'span8', 'required' => true)); ?>
 	</div>
 
 	<div class='row-fluid control-group <?php echo $model->hasErrors('email') ? 'error' : ''; ?>'>
-		<?php echo $form->textFieldRow($model, 'email', array('class' => 'span6', 'required' => true)); ?>
+		<?php echo $form->textFieldRow($model, 'email', array('class' => 'span8', 'required' => true)); ?>
 	</div>
 
 	<div class='row-fluid control-group <?php echo $model->hasErrors('theme') ? 'error' : ''; ?>'>
-		<?php echo $form->textFieldRow($model, 'theme', array('class' => 'span6', 'required' => true)); ?>
+		<?php echo $form->textFieldRow($model, 'theme', array('class' => 'span8', 'required' => true)); ?>
 	</div>
 
 	<div class='row-fluid control-group <?php echo $model->hasErrors('text') ? 'error' : ''; ?>'>
-		<?php echo $form->textAreaRow($model, 'text', array('class' => 'span8', 'rows' => 10, 'required' => true)); ?>
+		<?php echo $form->textAreaRow($model, 'text', array('class' => 'span10', 'rows' => 10, 'required' => true)); ?>
 	</div>
 
 	<?php if ($module->showCaptcha && !Yii::app()->user->isAuthenticated()): ?>
@@ -98,13 +100,4 @@ Yii::import('application.modules.install.InstallModule');
 
 
 	<?php $this->endWidget(); ?>
-</div>
-
-
-<div class="alert alert-success">
-
-	<p><?php echo Yii::t('InstallModule.install', 'Interesting links:'); ?></p>
-
-	<br/><br/>
-
 </div>
