@@ -23,7 +23,7 @@ Yii::import('application.modules.install.InstallModule');
 
 </div>
 
-<div class="form">
+<div class="form" id="feedback"">
 	<?php $form = $this->beginWidget(
 		'bootstrap.widgets.TbActiveForm',
 		array(

@@ -102,7 +102,16 @@ class ContactController extends yupe\components\controllers\FrontController
 						$emailBody = $this->renderPartial('feedbackEmail', array('model' => $feedback), true);
 
 						foreach (explode(',', $module->emails) as $mail) {
-							Yii::app()->mail->send($feedback->email, $mail, $form->theme, $emailBody);
+							//{ author="Pogiba" date="2014-05-30" desc=""
+							//Yii::app()->mail->send($feedback->email, $mail, $form->theme, $emailBody);
+
+							$message = new YiiMailMessage;
+							$message->setBody($emailBody, 'text');
+							$message->subject = $form->theme;
+							$message->addTo('workposst@gmail.com');
+							$message->from = 'workposst@gmail.com';//Yii::app()->params['adminEmail'];
+							Yii::app()->mail->send($message);
+							//}
 						}
 
 						if ($module->sendConfirmation) {
