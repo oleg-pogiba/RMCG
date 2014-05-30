@@ -47,8 +47,8 @@ form{
     margin:0 auto;
 }
 
-form#feedback{
-    width:500px;
+#feedback, #feedback form {
+    width:400px;
     margin:0 auto;
 }
 
