@@ -43,6 +43,14 @@ $form = $this->beginWidget(
 <div class="row-fluid control-group <?php echo $model->hasErrors("code") ? "error" : ""; ?>">
 	<?php echo $form->textFieldRow($model, 'code', array('class' => 'popover-help span7', 'maxlength' => 255, 'data-original-title' => $model->getAttributeLabel('code'), 'data-content' => $model->getAttributeDescription('code'))); ?>
 </div>
+<div class="row-fluid control-group <?php echo $model->hasErrors('lang') ? 'error' : ''; ?>">
+	<div class="span7">
+		<?php echo $form->dropDownListRow($model, 'lang', $model->getLangs(), array('class' => 'span7')); ?>
+	</div>
+	<div class="span5">
+		<?php echo $form->error($model, 'lang'); ?>
+	</div>
+</div>
 <div class="row-fluid control-group <?php echo $model->hasErrors("description") ? "error" : ""; ?>">
 	<div class="popover-help" data-original-title='<?php echo $model->getAttributeLabel('description'); ?>'
 		 data-content='<?php echo $model->getAttributeDescription('description'); ?>'>
