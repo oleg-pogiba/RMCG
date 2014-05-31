@@ -60,6 +60,7 @@ $this->menu = array(
 			'filter' => $model->getTypes()
 		),
 		'code',
+		'lang',
 		'description',
 		array(
 			'class' => 'bootstrap.widgets.TbButtonColumn',

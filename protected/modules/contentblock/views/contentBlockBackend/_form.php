@@ -38,6 +38,14 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <div class='control-group <?php echo $model->hasErrors("code") ? "error" : ""; ?>'>
 	<?php echo $form->textFieldRow($model, 'code', array('class' => 'span7', 'maxlength' => 100)); ?>
 </div>
+<div class="row-fluid control-group <?php echo $model->hasErrors('lang') ? 'error' : ''; ?>">
+	<div class="span7">
+		<?php echo $form->dropDownListRow($model, 'lang', $model->getLangs(), array('class' => 'span7')); ?>
+	</div>
+	<div class="span5">
+		<?php echo $form->error($model, 'lang'); ?>
+	</div>
+</div>
 <div class="row-fluid control-group <?php echo $model->hasErrors('content') ? 'error' : ''; ?>">
 	<div class="span12">
 		<?php echo $form->labelEx($model, 'content'); ?>

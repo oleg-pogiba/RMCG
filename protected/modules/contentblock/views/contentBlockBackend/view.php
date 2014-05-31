@@ -42,6 +42,7 @@ $this->menu = array(
 			'name' => 'type',
 			'value' => $model->getType(),
 		),
+		'lang',
 		'content',
 		'description',
 	),

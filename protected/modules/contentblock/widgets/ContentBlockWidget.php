@@ -33,7 +33,7 @@ class ContentBlockWidget extends YWidget
 
 		if ($output === false) {
 
-			$block = ContentBlock::model()->find('code = :code', array(':code' => $this->code));
+			$block = ContentBlock::model()->find('code = :code and lang = :lang', array(':code' => $this->code, ':lang'=> Yii::app()->language));
 
 			if (null === $block) {
 				if ($this->silent === false) {
