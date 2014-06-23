@@ -8,6 +8,10 @@ $this->description = $page->description ?: $this->description;
 $this->keywords    = $page->keywords ?: $this->keywords
 ?>
 
-<h3><?php echo $page->title; ?></h3>
+<!--<h3><?php echo $page->title; ?></h3>-->
 
-<p><?php echo $page->body; ?></p>
+<!--<p><?php echo $page->body; ?></p>-->
+
+<div id="content">
+  	<?php echo $page->body; ?>
+</div>
