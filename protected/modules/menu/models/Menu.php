@@ -14,6 +14,7 @@
  * @property string $id
  * @property string $name
  * @property string $code
+ * @property string $lang
  * @property string $description
  * @property integer $status
  *
@@ -49,13 +50,13 @@ class Menu extends yupe\models\YModel
 	public function rules()
 	{
 		return array(
-			array('name, code, description', 'required', 'except' => 'search'),
+			array('name, code, lang, description', 'required', 'except' => 'search'),
 			array('status', 'numerical', 'integerOnly' => true),
-			array('name, code, description', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
+			array('name, code, lang, description', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
 			array('name, description', 'length', 'max' => 255),
 			array('code', 'length', 'max' => 100),
 			array('code', 'yupe\components\validators\YSLugValidator'),
-			array('code', 'unique'),
+			//array('code', 'unique'),
 			array('status', 'in', 'range' => array_keys($this->statusList)),
 			array('id, name, code, description, status', 'safe', 'on' => 'search'),
 		);
@@ -82,6 +83,7 @@ class Menu extends yupe\models\YModel
 			'id' => Yii::t('MenuModule.menu', 'Id'),
 			'name' => Yii::t('MenuModule.menu', 'Name'),
 			'code' => Yii::t('MenuModule.menu', 'Unified code'),
+			'lang' => Yii::t('MenuModule.menu', 'Language'),
 			'description' => Yii::t('MenuModule.menu', 'Description'),
 			'status' => Yii::t('MenuModule.menu', 'Status'),
 		);
@@ -117,6 +119,7 @@ class Menu extends yupe\models\YModel
 		$criteria->compare('code', $this->code, true);
 		$criteria->compare('description', $this->description, true);
 		$criteria->compare('status', $this->status);
+		$criteria->compare('lang', $this->lang);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
@@ -184,7 +187,8 @@ class Menu extends yupe\models\YModel
 				)
 			)->findByAttributes(
 					array(
-						'code' => $code
+						'code' => $code,
+						'lang' => Yii::app()->language,
 					)
 				);
 
@@ -300,4 +304,17 @@ class Menu extends yupe\models\YModel
 
 		return false;
 	}
+
+	//{ author="Pogiba" date="2014-05-31" desc=""
+	public function getLangs()
+	{
+		$langs = array();
+		Yii::app()->urlManager->getLangs();
+		foreach(Yii::app()->urlManager->languages as $language)
+		{
+			$langs[$language] = $language;
+		}
+		return $langs;
+	}
+	//}
 }

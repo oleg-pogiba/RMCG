@@ -19,6 +19,7 @@
  * @property integer $type
  * @property string $content
  * @property string $description
+ * @property string $lang
  */
 class ContentBlock extends yupe\models\YModel
 {
@@ -50,9 +51,9 @@ class ContentBlock extends yupe\models\YModel
 	public function rules()
 	{
 		return array(
-			array('name, code, content, type', 'filter', 'filter' => 'trim'),
+			array('name, code, content, type, lang', 'filter', 'filter' => 'trim'),
 			array('name, code', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
-			array('name, code, content, type', 'required'),
+			array('name, code, content, type, lang', 'required'),
 			array('type', 'numerical', 'integerOnly' => true),
 			array('type', 'length', 'max' => 11),
 			array('type', 'in', 'range' => array_keys($this->types)),
@@ -60,8 +61,8 @@ class ContentBlock extends yupe\models\YModel
 			array('code', 'length', 'max' => 100),
 			array('description', 'length', 'max' => 255),
 			array('code', 'yupe\components\validators\YSLugValidator', 'message' => Yii::t('ContentBlockModule.contentblock', 'Unknown field format "{attribute}" only alphas, digits and _, from 2 to 50 characters')),
-			array('code', 'unique'),
-			array('id, name, code, type, content, description', 'safe', 'on' => 'search'),
+			//array('code', 'unique'),
+			array('id, name, code, type, content, description, lang', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -77,6 +78,9 @@ class ContentBlock extends yupe\models\YModel
 			'type' => Yii::t('ContentBlockModule.contentblock', 'Type'),
 			'content' => Yii::t('ContentBlockModule.contentblock', 'Content'),
 			'description' => Yii::t('ContentBlockModule.contentblock', 'Description'),
+			//{ author="Pogiba" date="2014-05-31" desc="add lang field"
+			'lang' => Yii::t('ContentBlockModule.contentblock', 'Lang'),
+			//}
 		);
 	}
 
@@ -95,6 +99,9 @@ class ContentBlock extends yupe\models\YModel
 		$criteria->compare('type', $this->type);
 		$criteria->compare('content', $this->content);
 		$criteria->compare('description', $this->description);
+		//{ author="Pogiba" date="2014-05-31" desc="add lang field"
+		$criteria->compare('lang', $this->lang);
+		//}
 
 		return new CActiveDataProvider(get_class($this), array('criteria' => $criteria));
 	}
@@ -113,6 +120,19 @@ class ContentBlock extends yupe\models\YModel
 		$data = $this->types;
 		return isset($data[$this->type]) ? $data[$this->type] : Yii::t('ContentBlockModule.contentblock', '*unknown type*');
 	}
+
+	//{ author="Pogiba" date="2014-05-31" desc=""
+	public function getLangs()
+	{
+		$langs = array();
+		Yii::app()->urlManager->getLangs();
+		foreach(Yii::app()->urlManager->languages as $language)
+		{
+			$langs[$language] = $language;
+		}
+		return $langs;
+	}
+	//}
 
 	protected function beforeSave()
 	{

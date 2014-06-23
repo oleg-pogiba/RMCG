@@ -12,6 +12,6 @@ $this->keywords    = $page->keywords ?: $this->keywords
 		<?php $this->widget('application.modules.menu.widgets.MenuWidget', array('name' => 'right-menu')); ?>
 	</div>
 	<div class="cnt">
-		<blockquote><?php echo $page->title; ?></blockquote>
+		<!--<blockquote><?php echo $page->title; ?></blockquote>-->
 		<?php echo $page->body; ?>
 	</div>

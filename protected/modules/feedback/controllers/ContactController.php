@@ -81,7 +81,11 @@ class ContactController extends yupe\components\controllers\FrontController
 								if (Yii::app()->getRequest()->getIsAjaxRequest()) {
 									Yii::app()->ajax->success(Yii::t('FeedbackModule.feedback', 'Your message sent! Thanks!'));
 								}
-								$this->redirect($module->successPage ? array($module->successPage) : array('/feedback/contact/faq'));
+								//{ author="Pogiba" date="2014-05-30" desc=""
+								//$this->redirect($module->successPage ? array($module->successPage) : array('/feedback/contact/faq'));
+								//$this->redirect($module->successPage ? array($module->successPage) : array('/feedback/contact/index'));
+								//}
+
 							}
 						} else {
 							Yii::log(
@@ -102,7 +106,15 @@ class ContactController extends yupe\components\controllers\FrontController
 						$emailBody = $this->renderPartial('feedbackEmail', array('model' => $feedback), true);
 
 						foreach (explode(',', $module->emails) as $mail) {
-							Yii::app()->mail->send($feedback->email, $mail, $form->theme, $emailBody);
+							//{ author="Pogiba" date="2014-05-30" desc=""
+							//Yii::app()->mail->send($feedback->email, $mail, $form->theme, $emailBody);
+							$message = new YiiMailMessage;
+							$message->setBody($emailBody, 'html/text');
+							$message->subject = $form->theme;
+							$message->addTo($feedback->email);
+							$message->from = $mail;
+							Yii::app()->mail->send($message);
+							//}
 						}
 
 						if ($module->sendConfirmation) {
@@ -122,15 +134,18 @@ class ContactController extends yupe\components\controllers\FrontController
 						if (Yii::app()->getRequest()->getIsAjaxRequest()) {
 							Yii::app()->ajax->success(Yii::t('FeedbackModule.feedback', 'Your message sent! Thanks!'));
 						}
-						$this->redirect($module->successPage ? array($module->successPage) : array('/feedback/contact/faq'));
+						//{ author="Pogiba" date="2014-05-30" desc=""
+						//$this->redirect($module->successPage ? array($module->successPage) : array('/feedback/contact/faq'));
+						$this->redirect($module->successPage ? array($module->successPage) : array('/feedback/contact/index/'));
+						//}
 					}
 				}
+
 
 				Yii::app()->user->setFlash(
 					YFlashMessages::ERROR_MESSAGE,
 					Yii::t('FeedbackModule.feedback', 'It is not possible to send message!')
 				);
-
 				if (Yii::app()->getRequest()->getIsAjaxRequest()) {
 					Yii::app()->ajax->failure(Yii::t('FeedbackModule.feedback', 'It is not possible to send message!'));
 				}

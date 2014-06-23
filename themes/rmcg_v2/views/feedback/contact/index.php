@@ -23,7 +23,7 @@ Yii::import('application.modules.install.InstallModule');
 
 </div>
 
-<div class="form">
+<div class="form" id="feedback"">
 	<?php $form = $this->beginWidget(
 		'bootstrap.widgets.TbActiveForm',
 		array(
@@ -43,24 +43,24 @@ Yii::import('application.modules.install.InstallModule');
 
 	<?php if ($model->type): ?>
 		<div class='row-fluid control-group <?php echo $model->hasErrors('type') ? 'error' : ''; ?>'>
-			<?php echo $form->dropDownListRow($model, 'type', $module->types, array('class' => 'span8', 'required' => true)); ?>
+			<?php echo $form->dropDownListRow($model, 'type', $module->types, array('class' => 'span10', 'required' => true)); ?>
 		</div>
 	<?php endif; ?>
 
 	<div class='row-fluid control-group <?php echo $model->hasErrors('name') ? 'error' : ''; ?>'>
-		<?php echo $form->textFieldRow($model, 'name', array('class' => 'span8', 'required' => true)); ?>
+		<?php echo $form->textFieldRow($model, 'name', array('class' => 'span10', 'required' => true)); ?>
 	</div>
 
 	<div class='row-fluid control-group <?php echo $model->hasErrors('email') ? 'error' : ''; ?>'>
-		<?php echo $form->textFieldRow($model, 'email', array('class' => 'span8', 'required' => true)); ?>
+		<?php echo $form->textFieldRow($model, 'email', array('class' => 'span10', 'required' => true)); ?>
 	</div>
 
 	<div class='row-fluid control-group <?php echo $model->hasErrors('theme') ? 'error' : ''; ?>'>
-		<?php echo $form->textFieldRow($model, 'theme', array('class' => 'span8', 'required' => true)); ?>
+		<?php echo $form->textFieldRow($model, 'theme', array('class' => 'span10', 'required' => true)); ?>
 	</div>
 
 	<div class='row-fluid control-group <?php echo $model->hasErrors('text') ? 'error' : ''; ?>'>
-		<?php echo $form->textAreaRow($model, 'text', array('class' => 'span10', 'rows' => 10, 'required' => true)); ?>
+		<?php echo $form->textAreaRow($model, 'text', array('class' => 'span12', 'rows' => 10, 'required' => true)); ?>
 	</div>
 
 	<?php if ($module->showCaptcha && !Yii::app()->user->isAuthenticated()): ?>
@@ -97,7 +97,6 @@ Yii::import('application.modules.install.InstallModule');
 			'label' => Yii::t('FeedbackModule.feedback', 'Send message'),
 		)
 	); ?>
-
-
 	<?php $this->endWidget(); ?>
 </div>
+<br/>

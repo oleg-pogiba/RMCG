@@ -71,7 +71,7 @@ class Page extends yupe\models\YModel
 	public function rules()
 	{
 		return array(
-			array('title, slug, body, lang, vw', 'required', 'on' => array('update', 'insert')),
+			array('slug, body, lang, vw', 'required', 'on' => array('update', 'insert')),
 			array('status, is_protected, parent_id, order, category_id', 'numerical', 'integerOnly' => true, 'on' => array('update', 'insert')),
 			array('parent_id', 'length', 'max' => 45),
 			array('lang', 'length', 'max' => 2),
