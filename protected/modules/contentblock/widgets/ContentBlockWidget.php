@@ -33,7 +33,11 @@ class ContentBlockWidget extends YWidget
 
 		if ($output === false) {
 
+<<<<<<< HEAD
 			$block = ContentBlock::model()->find('code = :code', array(':code' => $this->code));
+=======
+			$block = ContentBlock::model()->find('code = :code and lang = :lang', array(':code' => $this->code, ':lang'=> Yii::app()->language));
+>>>>>>> parent of 59337da... добавил многоязычность меню
 
 			if (null === $block) {
 				if ($this->silent === false) {
